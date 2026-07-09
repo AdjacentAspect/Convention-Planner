@@ -3,20 +3,26 @@ import {
   TransformWrapper,
 } from "react-zoom-pan-pinch";
 
-import { currentEvent } from "../data/event";
+import type {
+  Booth,
+  ConventionEvent,
+} from "../types/models";
+
 import BoothOverlay from "./BoothOverlay";
-
 import DeveloperOverlay from "./DeveloperOverlay";
-
-import type { Booth } from "../types/models";
 
 type Props = {
   floor: string;
+  event: ConventionEvent;
   onBoothClick: (booth: Booth) => void;
 };
 
-function MapViewer({ floor, onBoothClick }: Props) {
-  const currentFloor = currentEvent.floors.find(
+function MapViewer({
+  floor,
+  event,
+  onBoothClick,
+}: Props) {
+  const currentFloor = event.floors.find(
     (f) => f.name === floor
   );
 
@@ -27,12 +33,8 @@ function MapViewer({ floor, onBoothClick }: Props) {
         minScale={0.5}
         maxScale={6}
         centerOnInit
-        wheel={{
-          step: 0.01,
-        }}
-        pinch={{
-          step: 5,
-        }}
+        wheel={{ step: 0.01 }}
+        pinch={{ step: 5 }}
       >
         <TransformComponent
           wrapperStyle={{
@@ -47,7 +49,7 @@ function MapViewer({ floor, onBoothClick }: Props) {
               className="map-image"
             />
 
-						<DeveloperOverlay />
+            <DeveloperOverlay />
 
             <BoothOverlay
               booths={currentFloor?.booths ?? []}

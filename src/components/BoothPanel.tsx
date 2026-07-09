@@ -8,7 +8,7 @@ type Props = {
   onVisited: () => void;
 };
 
-function BottomSheet({
+function BoothPanel({
   open,
   booth,
   onClose,
@@ -34,7 +34,10 @@ function BottomSheet({
         </p>
 
         <button
-          onClick={onVisited}
+          onClick={() => {
+            onVisited();
+            onClose();
+          }}
           style={visitedButton}
         >
           ✅ Mark Visited
@@ -90,4 +93,4 @@ const closeButton: CSSProperties = {
   marginTop: 12,
 };
 
-export default BottomSheet;
+export default BoothPanel;
