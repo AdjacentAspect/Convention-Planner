@@ -4,12 +4,17 @@ import {
 } from "react-zoom-pan-pinch";
 
 import { currentEvent } from "../data/currentEvent";
+import BoothOverlay from "./BoothOverlay";
 
 type Props = {
   floor: string;
 };
 
 function MapViewer({ floor }: Props) {
+  const currentFloor = currentEvent.floors.find(
+    (f) => f.name === floor
+  );
+
   return (
     <div className="map-viewer">
       <TransformWrapper
@@ -17,23 +22,31 @@ function MapViewer({ floor }: Props) {
         minScale={0.5}
         maxScale={6}
         centerOnInit
-        wheel={{ step: 0.2 }}
-      >
+        wheel={{
+            step: 0.001,
+        }}
+        pinch={{
+            step: 5,
+        }}
+        
+        >
         <TransformComponent
           wrapperStyle={{
             width: "100%",
             height: "100%",
           }}
         >
-          <img
-            src={
-                currentEvent.floors.find(
-                    (f) => f.name === floor
-                )?.image
-            }
-            alt={floor}
-            className="map-image"
-          />
+          <div className="map-container">
+            <img
+              src={currentFloor?.image}
+              alt={floor}
+              className="map-image"
+            />
+
+            <BoothOverlay
+              
+            />
+          </div>
         </TransformComponent>
       </TransformWrapper>
     </div>

@@ -78,15 +78,10 @@ export const currentEvent: ConventionEvent = {
           notes: "",
 
           bounds: {
-
-            x: 0.45,
-
-            y: 0.30,
-
-            width: 0.04,
-
-            height: 0.03
-
+            x: 40,
+            y: 30,
+            width: 8,
+            height: 6,
           },
 
           wishlist: [],

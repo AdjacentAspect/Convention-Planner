@@ -54,6 +54,8 @@ body {
 }
 
 .map-viewer {
+  position: relative;
+
   flex: 1;
   overflow: hidden;
 
@@ -65,15 +67,11 @@ body {
 }
 
 .map-image {
-  display: block;
+    display: block;
 
-  width: 100%;
+    max-width: 100%;
 
-  height: auto;
-
-  user-select: none;
-
-  pointer-events: none;
+    height: auto;
 }
 
 .bottom-nav {
@@ -93,4 +91,71 @@ body {
   border: none;
   font-size: 24px;
   cursor: pointer;
+}
+
+.map-container {
+    position: relative;
+
+    width: fit-content;
+
+    display: inline-block;
+}
+
+.booth {
+
+    position:absolute;
+
+    border:5px solid cyan;
+
+    background:red;
+
+    opacity:1;
+
+    z-index:9999;
+
+}
+
+.red {
+  background: red;
+}
+
+.yellow {
+  background: gold;
+}
+
+.green {
+  background: limegreen;
+}
+
+.grey {
+  background: grey;
+}
+
+.visited {
+  background: black;
+}
+
+.overlay-layer {
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+.debug-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  z-index: 99999;
+
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
 }
