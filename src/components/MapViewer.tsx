@@ -8,9 +8,11 @@ import BoothOverlay from "./BoothOverlay";
 
 import DeveloperOverlay from "./DeveloperOverlay";
 
+import type { Booth } from "../types/models";
+
 type Props = {
   floor: string;
-  onBoothClick: (booth: any) => void;
+  onBoothClick: (booth: Booth) => void;
 };
 
 function MapViewer({ floor, onBoothClick }: Props) {
