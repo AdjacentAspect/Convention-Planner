@@ -1,5 +1,9 @@
 import type { CSSProperties } from "react";
 
+type Props = {
+  onBoothClick: (table: string) => void;
+};
+
 type BoothProps = {
   table: string;
   left: number;
@@ -7,6 +11,7 @@ type BoothProps = {
   width: number;
   height: number;
   colour?: string;
+  onClick: (table: string) => void;
 };
 
 function Booth({
@@ -16,6 +21,7 @@ function Booth({
   width,
   height,
   colour = "red",
+  onClick,
 }: BoothProps) {
   const style: CSSProperties = {
     position: "absolute",
@@ -33,14 +39,12 @@ function Booth({
   return (
     <div
       style={style}
-      onClick={() => {
-        console.log("Clicked booth:", table);
-      }}
+      onClick={() => onClick(table)}
     />
   );
 }
 
-function BoothOverlay() {
+function BoothOverlay({ onBoothClick }: Props) {
   return (
     <>
       <Booth
@@ -49,6 +53,7 @@ function BoothOverlay() {
         top={30}
         width={8}
         height={6}
+        onClick={onBoothClick}
       />
     </>
   );

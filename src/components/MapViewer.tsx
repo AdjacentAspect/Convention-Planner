@@ -3,6 +3,9 @@ import {
   TransformWrapper,
 } from "react-zoom-pan-pinch";
 
+import { useState } from "react";
+import BottomSheet from "./BottomSheet";
+
 import { currentEvent } from "../data/currentEvent";
 import BoothOverlay from "./BoothOverlay";
 
@@ -11,6 +14,10 @@ type Props = {
 };
 
 function MapViewer({ floor }: Props) {
+
+    const [selectedBooth, setSelectedBooth] =
+    useState<string | null>(null);
+
   const currentFloor = currentEvent.floors.find(
     (f) => f.name === floor
   );
@@ -43,7 +50,15 @@ function MapViewer({ floor }: Props) {
               className="map-image"
             />
 
-            <BoothOverlay />
+            <BoothOverlay
+                onBoothClick={(table) => setSelectedBooth(table)}
+            />
+
+            <BottomSheet
+                open={selectedBooth !== null}
+                table={selectedBooth ?? ""}
+                onClose={() => setSelectedBooth(null)}
+            />
           </div>
         </TransformComponent>
       </TransformWrapper>
