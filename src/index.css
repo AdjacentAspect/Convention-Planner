@@ -54,23 +54,26 @@ body {
 }
 
 .map-viewer {
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 70px);
-}
-
-.map-placeholder {
   flex: 1;
-  background: #1f2937;
-  border: 2px dashed #4b5563;
+  overflow: hidden;
+
   border-radius: 12px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #0f172a;
 
-  color: #9ca3af;
-  font-size: 20px;
+  border: 1px solid #374151;
+}
+
+.map-image {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  user-select: none;
+
+  pointer-events: none;
 }
 
 .bottom-nav {
