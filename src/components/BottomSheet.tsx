@@ -1,15 +1,16 @@
 import type { CSSProperties } from "react";
+import type { Booth } from "../types/models";
 
 type Props = {
   open: boolean;
-  table: string;
+  booth: Booth | null;
   onClose: () => void;
   onVisited: () => void;
 };
 
 function BottomSheet({
   open,
-  table,
+  booth,
   onClose,
   onVisited,
 }: Props) {
@@ -18,33 +19,32 @@ function BottomSheet({
   return (
     <div style={backdropStyle}>
       <div style={sheetStyle}>
-        <h2>{table}</h2>
+        <div style={handleStyle} />
+
+        <h2>{booth?.table}</h2>
+
+        <p>{booth?.artist}</p>
+
+        <p>
+            Priority: {booth?.priority}
+        </p>
+
+        <p>
+            Notes: {booth?.notes || "None"}
+        </p>
 
         <button
           onClick={onVisited}
-          style={{
-            width: "100%",
-            padding: 20,
-            background: "green",
-            color: "white",
-            fontSize: 20,
-            marginBottom: 20,
-          }}
+          style={visitedButton}
         >
-          MARK VISITED
+          ✅ Mark Visited
         </button>
 
         <button
           onClick={onClose}
-          style={{
-            width: "100%",
-            padding: 20,
-            background: "red",
-            color: "white",
-            fontSize: 20,
-          }}
+          style={closeButton}
         >
-          CLOSE
+          Close
         </button>
       </div>
     </div>
@@ -54,19 +54,40 @@ function BottomSheet({
 const backdropStyle: CSSProperties = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.4)",
+  background: "rgba(0,0,0,0.25)",
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  zIndex: 99999,
+  alignItems: "flex-end",
+  zIndex: 9999,
 };
 
 const sheetStyle: CSSProperties = {
-  width: 350,
-  background: "white",
-  color: "black",
-  padding: 20,
-  borderRadius: 12,
+  width: "100%",
+  background: "#1f2937",
+  color: "white",
+  borderTopLeftRadius: 18,
+  borderTopRightRadius: 18,
+  padding: 24,
+  minHeight: 220,
+};
+
+const handleStyle: CSSProperties = {
+  width: 60,
+  height: 6,
+  background: "#666",
+  borderRadius: 99,
+  margin: "0 auto 20px",
+};
+
+const visitedButton: CSSProperties = {
+  width: "100%",
+  padding: 12,
+  marginTop: 20,
+};
+
+const closeButton: CSSProperties = {
+  width: "100%",
+  padding: 12,
+  marginTop: 12,
 };
 
 export default BottomSheet;

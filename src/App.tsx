@@ -5,13 +5,14 @@ import FloorSelector from "./components/FloorSelector";
 import MapViewer from "./components/MapViewer";
 import BottomNavigation from "./components/BottomNavigation";
 import BottomSheet from "./components/BottomSheet";
+import type { Booth } from "./types/models";
 
 function App() {
   const [selectedFloor, setSelectedFloor] =
     useState("Level 1");
 
   const [selectedBooth, setSelectedBooth] =
-    useState<string | null>(null);
+    useState<Booth | null>(null);
 
   return (
     <div className="app">
@@ -33,7 +34,7 @@ function App() {
 
       <BottomSheet
         open={selectedBooth !== null}
-        table={selectedBooth ?? ""}
+        booth={selectedBooth}
         onClose={() => setSelectedBooth(null)}
         onVisited={() => {
           alert("Visited feature next!");

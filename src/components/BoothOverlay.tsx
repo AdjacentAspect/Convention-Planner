@@ -3,12 +3,12 @@ import type { Booth } from "../types/models";
 
 type Props = {
   booths: Booth[];
-  onBoothClick: (table: string) => void;
+  onBoothClick: (booth: Booth) => void;
 };
 
 type BoothComponentProps = {
   booth: Booth;
-  onClick: (table: string) => void;
+  onClick: (booth: Booth) => void;
 };
 
 function BoothComponent({ booth, onClick }: BoothComponentProps) {
@@ -28,7 +28,7 @@ function BoothComponent({ booth, onClick }: BoothComponentProps) {
   return (
     <div
       style={style}
-      onClick={() => onClick(booth.table)}
+      onClick={() => onClick(booth)}
     />
   );
 }

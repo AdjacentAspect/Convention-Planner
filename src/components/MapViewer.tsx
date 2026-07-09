@@ -3,14 +3,14 @@ import {
   TransformWrapper,
 } from "react-zoom-pan-pinch";
 
-import { currentEvent } from "../data/currentEvent";
+import { currentEvent } from "../data/event";
 import BoothOverlay from "./BoothOverlay";
 
 import DeveloperOverlay from "./DeveloperOverlay";
 
 type Props = {
   floor: string;
-  onBoothClick: (table: string) => void;
+  onBoothClick: (booth: any) => void;
 };
 
 function MapViewer({ floor, onBoothClick }: Props) {
