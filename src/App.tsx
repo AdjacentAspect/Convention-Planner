@@ -4,9 +4,14 @@ import Header from "./components/Header";
 import FloorSelector from "./components/FloorSelector";
 import MapViewer from "./components/MapViewer";
 import BottomNavigation from "./components/BottomNavigation";
+import BottomSheet from "./components/BottomSheet";
 
 function App() {
-  const [selectedFloor, setSelectedFloor] = useState("Level 1");
+  const [selectedFloor, setSelectedFloor] =
+    useState("Level 1");
+
+  const [selectedBooth, setSelectedBooth] =
+    useState<string | null>(null);
 
   return (
     <div className="app">
@@ -18,10 +23,23 @@ function App() {
           onChange={setSelectedFloor}
         />
 
-        <MapViewer floor={selectedFloor} />
+        <MapViewer
+          floor={selectedFloor}
+          onBoothClick={setSelectedBooth}
+        />
       </main>
 
       <BottomNavigation />
+
+      <BottomSheet
+        open={selectedBooth !== null}
+        table={selectedBooth ?? ""}
+        onClose={() => setSelectedBooth(null)}
+        onVisited={() => {
+          alert("Visited feature next!");
+          setSelectedBooth(null);
+        }}
+      />
     </div>
   );
 }
