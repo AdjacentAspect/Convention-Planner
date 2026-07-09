@@ -62,3 +62,7 @@ export interface ConventionEvent {
 
   floors: Floor[];
 }
+
+export interface UserProgress {
+  visitedBooths: string[];
+}

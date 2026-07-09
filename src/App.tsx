@@ -7,28 +7,58 @@ import BottomNavigation from "./components/BottomNavigation";
 import BoothPanel from "./components/BoothPanel";
 
 import { currentEvent as initialEvent } from "./data/event";
-import type { Booth, ConventionEvent } from "./types/models";
+import type { Booth, UserProgress } from "./types/models";
+
+import ImageViewer from "./components/ImageViewer";
 
 const STORAGE_KEY = `${initialEvent.id}-progress`;
 
 function App() {
-  const [event, setEvent] =
-    useState<ConventionEvent>(() => {
-        const saved = localStorage.getItem(STORAGE_KEY);
+  const [progress, setProgress] =
+  useState<UserProgress>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
 
-        if (saved) {
-        return JSON.parse(saved);
-        }
+    if (!saved) {
+      return {
+        visitedBooths: [],
+      };
+    }
 
-        return initialEvent;
-    });
+    try {
+      const parsed = JSON.parse(saved);
 
-    useEffect(() => {
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(event)
-        );
-    }, [event]);
+      return {
+        visitedBooths: parsed.visitedBooths ?? [],
+      };
+    } catch {
+      return {
+        visitedBooths: [],
+      };
+    }
+  });
+
+    const event = {
+  ...initialEvent,
+
+  floors: initialEvent.floors.map((floor) => ({
+    ...floor,
+
+    booths: floor.booths.map((booth) => ({
+      ...booth,
+
+      visited: progress.visitedBooths.includes(
+        booth.id
+      ),
+    })),
+  })),
+};
+
+useEffect(() => {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(progress)
+  );
+}, [progress]);
 
   const [selectedFloor, setSelectedFloor] =
     useState("Level 1");
@@ -36,31 +66,40 @@ function App() {
   const [selectedBooth, setSelectedBooth] =
     useState<Booth | null>(null);
 
+    const [selectedImage, setSelectedImage] =
+    useState<string | null>(null);
+
   function toggleVisited() {
-    if (!selectedBooth) return;
+  if (!selectedBooth) return;
 
-    const visited = !selectedBooth.visited;
+  setProgress((previous) => {
+    const alreadyVisited =
+      previous.visitedBooths.includes(
+        selectedBooth.id
+      );
 
-    setEvent((previous) => ({
-        ...previous,
-        floors: previous.floors.map((floor) => ({
-        ...floor,
-        booths: floor.booths.map((booth) =>
-            booth.id === selectedBooth.id
-            ? {
-                ...booth,
-                visited,
-                }
-            : booth
-        ),
-        })),
-    }));
-
-    setSelectedBooth({
-        ...selectedBooth,
-        visited,
-    });
+    if (alreadyVisited) {
+      return {
+        visitedBooths:
+          previous.visitedBooths.filter(
+            (id) => id !== selectedBooth.id
+          ),
+      };
     }
+
+    return {
+      visitedBooths: [
+        ...previous.visitedBooths,
+        selectedBooth.id,
+      ],
+    };
+  });
+
+  setSelectedBooth({
+    ...selectedBooth,
+    visited: !selectedBooth.visited,
+  });
+}
 
   return (
     <div className="app">
@@ -86,6 +125,11 @@ function App() {
         booth={selectedBooth}
         onVisited={toggleVisited}
         onClose={() => setSelectedBooth(null)}
+        onImageClick={setSelectedImage}
+      />
+      <ImageViewer
+        image={selectedImage}
+        onClose={() => setSelectedImage(null)}
       />
     </div>
   );

@@ -5,6 +5,11 @@ import level2 from "../assets/maps/level2.png";
 import level3 from "../assets/maps/level3.png";
 import level4 from "../assets/maps/level4.png";
 
+import img1 from "../assets/catalogues/4e14/img1.jpg";
+import img2 from "../assets/catalogues/4e14/img2.jpg";
+import img3 from "../assets/catalogues/4e14/img3.jpg";
+
+
 export const currentEvent: ConventionEvent = {
 
   id: "smash2026",
@@ -64,11 +69,11 @@ export const currentEvent: ConventionEvent = {
       booths: [
 
         {
-            id: "4E13",
+            id: "4E14",
 
-            table: "4.E.13",
+            table: "4.E.14",
 
-            artist: "Unknown",
+            artist: "THIS IS 4.E.14",
 
             priority: "red",
 
@@ -85,7 +90,11 @@ export const currentEvent: ConventionEvent = {
 
             wishlist: [],
 
-            images: [],
+            images: [
+              img1,
+              img2,
+              img3,
+            ],
         }
 
       ]

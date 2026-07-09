@@ -1,11 +1,14 @@
 import type { CSSProperties } from "react";
 import type { Booth } from "../types/models";
 
+import ImageGallery from "./BoothDetailsPanel/ImageGallery";
+
 type Props = {
   open: boolean;
   booth: Booth | null;
   onClose: () => void;
   onVisited: () => void;
+  onImageClick: (image: string) => void;
 };
 
 function BoothPanel({
@@ -13,6 +16,7 @@ function BoothPanel({
   booth,
   onClose,
   onVisited,
+  onImageClick,
 }: Props) {
   if (!open) return null;
 
@@ -36,9 +40,10 @@ function BoothPanel({
             : "🟢 Not Visited"}
         </p>
 
-        <p>
-            Notes: {booth?.notes || "None"}
-        </p>
+        <ImageGallery
+          booth={booth}
+          onImageClick={onImageClick}
+        />
 
         
         <button
