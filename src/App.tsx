@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import FloorSelector from "./components/FloorSelector";
@@ -9,9 +9,26 @@ import BoothPanel from "./components/BoothPanel";
 import { currentEvent as initialEvent } from "./data/event";
 import type { Booth, ConventionEvent } from "./types/models";
 
+const STORAGE_KEY = `${initialEvent.id}-progress`;
+
 function App() {
   const [event, setEvent] =
-    useState<ConventionEvent>(initialEvent);
+    useState<ConventionEvent>(() => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved) {
+        return JSON.parse(saved);
+        }
+
+        return initialEvent;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(event)
+        );
+    }, [event]);
 
   const [selectedFloor, setSelectedFloor] =
     useState("Level 1");
@@ -19,29 +36,31 @@ function App() {
   const [selectedBooth, setSelectedBooth] =
     useState<Booth | null>(null);
 
-  function markVisited() {
+  function toggleVisited() {
     if (!selectedBooth) return;
 
+    const visited = !selectedBooth.visited;
+
     setEvent((previous) => ({
-      ...previous,
-      floors: previous.floors.map((floor) => ({
+        ...previous,
+        floors: previous.floors.map((floor) => ({
         ...floor,
         booths: floor.booths.map((booth) =>
-          booth.id === selectedBooth.id
+            booth.id === selectedBooth.id
             ? {
                 ...booth,
-                visited: true,
-              }
+                visited,
+                }
             : booth
         ),
-      })),
+        })),
     }));
 
     setSelectedBooth({
-      ...selectedBooth,
-      visited: true,
+        ...selectedBooth,
+        visited,
     });
-  }
+    }
 
   return (
     <div className="app">
@@ -65,7 +84,7 @@ function App() {
       <BoothPanel
         open={selectedBooth !== null}
         booth={selectedBooth}
-        onVisited={markVisited}
+        onVisited={toggleVisited}
         onClose={() => setSelectedBooth(null)}
       />
     </div>

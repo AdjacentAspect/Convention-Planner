@@ -30,9 +30,17 @@ function BoothPanel({
         </p>
 
         <p>
+          <strong>Status:</strong>{" "}
+          {booth?.visited
+            ? "⚫ Visited"
+            : "🟢 Not Visited"}
+        </p>
+
+        <p>
             Notes: {booth?.notes || "None"}
         </p>
 
+        
         <button
           onClick={() => {
             onVisited();
@@ -40,7 +48,9 @@ function BoothPanel({
           }}
           style={visitedButton}
         >
-          ✅ Mark Visited
+          {booth?.visited
+            ? "↩️ Mark Unvisited"
+            : "✅ Mark Visited"}
         </button>
 
         <button
