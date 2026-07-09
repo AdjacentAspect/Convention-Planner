@@ -1,37 +1,29 @@
+import { useState } from "react";
+
+import Header from "./components/Header";
+import FloorSelector from "./components/FloorSelector";
+import MapViewer from "./components/MapViewer";
+import BottomNavigation from "./components/BottomNavigation";
+
 function App() {
-    return (
-        <div className="app">
+  const [selectedFloor, setSelectedFloor] = useState("Level 1");
 
-            <header className="header">
+  return (
+    <div className="app">
+      <Header />
 
-                <h1>Convention Planner</h1>
+      <main className="main-content">
+        <FloorSelector
+          selectedFloor={selectedFloor}
+          onChange={setSelectedFloor}
+        />
 
-            </header>
+        <MapViewer floor={selectedFloor} />
+      </main>
 
-            <main>
-
-                <button>
-
-                    Load Event
-
-                </button>
-
-                <h2>
-
-                    No Event Loaded
-
-                </h2>
-
-                <p>
-
-                    Select a convention to begin.
-
-                </p>
-
-            </main>
-
-        </div>
-    );
+      <BottomNavigation />
+    </div>
+  );
 }
 
 export default App;
