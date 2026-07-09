@@ -24,14 +24,19 @@ body {
 
 .header {
   background: #1f2937;
+  padding: 20px;
   text-align: center;
-  padding: 16px;
   border-bottom: 1px solid #374151;
 }
 
+.header h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
 .subtitle {
+  margin-top: 6px;
   color: #9ca3af;
-  margin-top: 4px;
   font-size: 0.9rem;
 }
 
@@ -54,16 +59,18 @@ body {
 }
 
 .map-viewer {
-  position: relative;
-
   flex: 1;
+
   overflow: hidden;
 
-  border-radius: 12px;
+  border-radius: 18px;
 
   background: #0f172a;
 
   border: 1px solid #374151;
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.35);
 }
 
 .map-image {
@@ -77,20 +84,37 @@ body {
 .bottom-nav {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 
   background: #1f2937;
 
   border-top: 1px solid #374151;
 
-  padding: 10px;
+  padding: 12px 8px;
 }
 
 .bottom-nav button {
-  background: transparent;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  background: none;
+
   border: none;
-  font-size: 24px;
-  cursor: pointer;
+
+  color: #9ca3af;
+
+  font-size: 22px;
+
+  cursor: not-allowed;
+
+  opacity: 0.7;
+}
+
+.bottom-nav button span {
+  font-size: 12px;
 }
 
 .map-container {
@@ -109,12 +133,19 @@ body {
 
 .filter-row button {
   flex: 1;
+
   padding: 10px;
+
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
+
+  border-radius: 999px;
+
   background: #374151;
+
   color: white;
+
+  cursor: pointer;
+
   transition: 0.2s;
 }
 
@@ -124,8 +155,9 @@ body {
 
 .filter-row button.active {
   background: #2563eb;
-}
 
+  transform: scale(1.04);
+}
 
 
 

@@ -1,8 +1,13 @@
+import { currentEvent } from "../data/event";
+
 function Header() {
   return (
     <header className="header">
-      <h1>Convention Planner</h1>
-      <p className="subtitle">SMASH! 2026</p>
+      <h1>{currentEvent.name}</h1>
+
+      <p className="subtitle">
+        {currentEvent.venue}
+      </p>
     </header>
   );
 }
