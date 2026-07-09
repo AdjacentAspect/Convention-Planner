@@ -27,8 +27,6 @@ function BoothPanel({
 
         <h2>{booth?.table}</h2>
 
-        <p>{booth?.artist}</p>
-
         <p>
             Priority: {booth?.priority}
         </p>

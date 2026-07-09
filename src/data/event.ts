@@ -73,13 +73,9 @@ export const currentEvent: ConventionEvent = {
 
             table: "4.E.14",
 
-            artist: "THIS IS 4.E.14",
-
-            priority: "red",
+            priority: "high",
 
             visited: false,
-
-            notes: "",
 
             bounds: {
                 x: 40,
@@ -87,8 +83,6 @@ export const currentEvent: ConventionEvent = {
                 width: 8,
                 height: 6,
             },
-
-            wishlist: [],
 
             images: [
               img1,

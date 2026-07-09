@@ -101,7 +101,30 @@ body {
     display: inline-block;
 }
 
+.filter-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
 
+.filter-row button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #374151;
+  color: white;
+  transition: 0.2s;
+}
+
+.filter-row button:hover {
+  background: #4b5563;
+}
+
+.filter-row button.active {
+  background: #2563eb;
+}
 
 
 

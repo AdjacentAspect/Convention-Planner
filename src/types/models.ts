@@ -1,9 +1,8 @@
 export type BoothPriority =
-  | "red"
-  | "yellow"
-  | "green"
-  | "grey"
-  | "black";
+  | "high"
+  | "medium"
+  | "low"
+  | "none";
 
 export interface BoothBounds {
   x: number;
@@ -24,17 +23,11 @@ export interface Booth {
 
   table: string;
 
-  artist: string;
-
   priority: BoothPriority;
 
   visited: boolean;
 
-  notes: string;
-
   bounds: BoothBounds;
-
-  wishlist: WishlistItem[];
 
   images: string[];
 }
