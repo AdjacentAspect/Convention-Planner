@@ -51,7 +51,10 @@ function MapViewer({ floor }: Props) {
             />
 
             <BoothOverlay
-                onBoothClick={(table) => setSelectedBooth(table)}
+                booths={currentFloor?.booths ?? []}
+                onBoothClick={(table) =>
+                    setSelectedBooth(table)
+                }
             />
 
             <BottomSheet

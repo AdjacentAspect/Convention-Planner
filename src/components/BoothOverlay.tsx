@@ -1,35 +1,24 @@
 import type { CSSProperties } from "react";
+import type { Booth } from "../types/models";
 
 type Props = {
+  booths: Booth[];
   onBoothClick: (table: string) => void;
 };
 
-type BoothProps = {
-  table: string;
-  left: number;
-  top: number;
-  width: number;
-  height: number;
-  colour?: string;
+type BoothComponentProps = {
+  booth: Booth;
   onClick: (table: string) => void;
 };
 
-function Booth({
-  table,
-  left,
-  top,
-  width,
-  height,
-  colour = "red",
-  onClick,
-}: BoothProps) {
+function BoothComponent({ booth, onClick }: BoothComponentProps) {
   const style: CSSProperties = {
     position: "absolute",
-    left: `${left}%`,
-    top: `${top}%`,
-    width: `${width}%`,
-    height: `${height}%`,
-    background: colour,
+    left: `${booth.bounds.x}%`,
+    top: `${booth.bounds.y}%`,
+    width: `${booth.bounds.width}%`,
+    height: `${booth.bounds.height}%`,
+    background: booth.visited ? "black" : booth.priority,
     border: "2px solid white",
     opacity: 0.75,
     cursor: "pointer",
@@ -39,22 +28,21 @@ function Booth({
   return (
     <div
       style={style}
-      onClick={() => onClick(table)}
+      onClick={() => onClick(booth.table)}
     />
   );
 }
 
-function BoothOverlay({ onBoothClick }: Props) {
+function BoothOverlay({ booths, onBoothClick }: Props) {
   return (
     <>
-      <Booth
-        table="4.E.13"
-        left={40}
-        top={30}
-        width={8}
-        height={6}
-        onClick={onBoothClick}
-      />
+      {booths.map((booth) => (
+        <BoothComponent
+          key={booth.id}
+          booth={booth}
+          onClick={onBoothClick}
+        />
+      ))}
     </>
   );
 }

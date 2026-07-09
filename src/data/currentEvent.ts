@@ -64,30 +64,28 @@ export const currentEvent: ConventionEvent = {
       booths: [
 
         {
+            id: "4E13",
 
-          id: "demo",
+            table: "4.E.13",
 
-          table: "4.E.23",
+            artist: "Unknown",
 
-          artist: "",
+            priority: "red",
 
-          priority: "red",
+            visited: false,
 
-          visited: false,
+            notes: "",
 
-          notes: "",
+            bounds: {
+                x: 40,
+                y: 30,
+                width: 8,
+                height: 6,
+            },
 
-          bounds: {
-            x: 40,
-            y: 30,
-            width: 8,
-            height: 6,
-          },
+            wishlist: [],
 
-          wishlist: [],
-
-          images: []
-
+            images: [],
         }
 
       ]
