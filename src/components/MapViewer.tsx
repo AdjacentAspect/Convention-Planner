@@ -43,9 +43,7 @@ function MapViewer({ floor }: Props) {
               className="map-image"
             />
 
-            <BoothOverlay
-              
-            />
+            <BoothOverlay />
           </div>
         </TransformComponent>
       </TransformWrapper>
