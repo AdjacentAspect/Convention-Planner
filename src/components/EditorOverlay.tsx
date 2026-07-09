@@ -10,7 +10,7 @@ type Props = {
   enabled?: boolean;
 };
 
-function DeveloperOverlay({ enabled = true }: Props) {
+function EditorOverlay({ enabled = true }: Props) {
   const [mouse, setMouse] = useState<Point>({ x: 0, y: 0 });
   const [start, setStart] = useState<Point | null>(null);
 
@@ -69,7 +69,7 @@ function DeveloperOverlay({ enabled = true }: Props) {
       />
 
       <div style={panelStyle}>
-        <strong>Developer Mode</strong>
+        <strong>Editor Mode</strong>
 
         <div>
           Mouse: {mouse.x.toFixed(2)}%, {mouse.y.toFixed(2)}%
@@ -113,4 +113,4 @@ const panelStyle: CSSProperties = {
   fontSize: 13,
 };
 
-export default DeveloperOverlay;
+export default EditorOverlay;
