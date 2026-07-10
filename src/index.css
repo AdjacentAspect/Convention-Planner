@@ -266,15 +266,32 @@ body {
   animation: fadeIn 0.18s ease-out;
 }
 
-.image-viewer-image {
+.image-zoom-frame {
+  display: inline-flex;
+
   max-width: 95vw;
   max-height: 95vh;
-  object-fit: contain;
 
   border-radius: 12px;
 
+  overflow: hidden;
+
+  background: #111827;
+
   box-shadow:
     0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.image-viewer-image {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 95vw;
+  max-height: 95vh;
+
+  object-fit: contain;
 }
 
 .bottom-nav button {
@@ -431,4 +448,12 @@ body {
     color:white;
 
     font-weight:600;
+}
+
+.map-whiten-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.62);
+  pointer-events: none;
+  z-index: 10;
 }

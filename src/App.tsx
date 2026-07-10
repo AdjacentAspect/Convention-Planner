@@ -45,6 +45,9 @@ function App() {
   const [galleryImages, setGalleryImages] =
   useState<string[]>([]);
 
+  const [mapWhitening, setMapWhitening] =
+  useState(true);
+
   const [currentImageIndex, setCurrentImageIndex] =
     useState(0);
 
@@ -178,6 +181,7 @@ function App() {
             event={event}
             onBoothClick={setSelectedBooth}
             editorMode={editorMode}
+            dimMap={mapWhitening}
           />
         </main>
       )}
@@ -193,6 +197,10 @@ function App() {
           editorMode={editorMode}
           onToggleEditorMode={() =>
             setEditorMode((previous) => !previous)
+          }
+          mapWhitening={mapWhitening}
+          onToggleMapWhitening={() =>
+            setMapWhitening((previous) => !previous)
           }
           progress={progress}
           onResetProgress={() =>

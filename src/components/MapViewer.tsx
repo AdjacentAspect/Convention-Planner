@@ -17,6 +17,7 @@ type Props = {
   event: ConventionEvent;
   onBoothClick: (booth: Booth | null) => void;
   editorMode: boolean;
+  dimMap: boolean;
 };
 
 function MapViewer({
@@ -24,6 +25,7 @@ function MapViewer({
   event,
   onBoothClick,
   editorMode,
+  dimMap,
 }: Props) {
   const currentFloor = event.floors.find(
     (f) => f.name === floor
@@ -60,6 +62,10 @@ function MapViewer({
                   alt={floor}
                   className="map-image"
                 />
+
+                {dimMap && (
+                  <div className="map-whiten-overlay" />
+                )}
 
                 {editorMode && (
                   <EditorOverlay />

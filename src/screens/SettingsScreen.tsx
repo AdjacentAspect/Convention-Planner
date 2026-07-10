@@ -3,6 +3,8 @@ import type { UserProgress } from "../types/models";
 type Props = {
   editorMode: boolean;
   onToggleEditorMode: () => void;
+  mapWhitening: boolean;
+  onToggleMapWhitening: () => void;
   onResetProgress: () => void;
   progress: UserProgress;
 };
@@ -10,6 +12,8 @@ type Props = {
 function SettingsScreen({
   editorMode,
   onToggleEditorMode,
+  mapWhitening,
+  onToggleMapWhitening,
   onResetProgress,
   progress,
 }: Props) {
@@ -32,6 +36,18 @@ function SettingsScreen({
             onClick={onToggleEditorMode}
           >
             {editorMode
+              ? "🟢 Enabled"
+              : "⚪ Disabled"}
+          </button>
+        </div>
+
+        <div>
+          <h3>Map Whitening</h3>
+
+          <button
+            onClick={onToggleMapWhitening}
+          >
+            {mapWhitening
               ? "🟢 Enabled"
               : "⚪ Disabled"}
           </button>
