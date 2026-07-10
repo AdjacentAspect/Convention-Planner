@@ -23,28 +23,21 @@ function ImageViewer({
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
-    function handleKeyDown(
-      event: KeyboardEvent
-    ) {
+    function handleKeyDown(event: KeyboardEvent) {
       switch (event.key) {
         case "Escape":
           onClose();
           break;
-
         case "ArrowLeft":
           onPrevious();
           break;
-
         case "ArrowRight":
           onNext();
           break;
       }
     }
 
-    window.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
+    window.addEventListener("keydown", handleKeyDown);
 
     return () =>
       window.removeEventListener(
@@ -71,17 +64,29 @@ function ImageViewer({
           e.changedTouches[0].clientX -
           touchStartX.current;
 
-        if (delta > 70) {
-          onPrevious();
-        }
+        if (delta > 70) onPrevious();
 
-        if (delta < -70) {
-          onNext();
-        }
+        if (delta < -70) onNext();
 
         touchStartX.current = null;
       }}
     >
+      <div className="gallery-top-bar">
+        <button
+          className="gallery-close"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+        >
+          ✕
+        </button>
+
+        <div className="gallery-counter">
+          {currentIndex + 1} / {images.length}
+        </div>
+      </div>
+
       <button
         className="gallery-arrow left"
         disabled={currentIndex === 0}
@@ -112,8 +117,7 @@ function ImageViewer({
       <button
         className="gallery-arrow right"
         disabled={
-          currentIndex ===
-          images.length - 1
+          currentIndex === images.length - 1
         }
         onClick={(e) => {
           e.stopPropagation();
@@ -122,10 +126,6 @@ function ImageViewer({
       >
         ▶
       </button>
-
-      <div className="gallery-counter">
-        {currentIndex + 1} / {images.length}
-      </div>
     </div>
   );
 }
