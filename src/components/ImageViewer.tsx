@@ -3,7 +3,7 @@ import {
   TransformWrapper,
 } from "react-zoom-pan-pinch";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   images: string[];
@@ -20,6 +20,8 @@ function ImageViewer({
   onNext,
   onClose,
 }: Props) {
+  const touchStartX = useRef<number | null>(null);
+
   useEffect(() => {
     function handleKeyDown(
       event: KeyboardEvent
@@ -49,11 +51,7 @@ function ImageViewer({
         "keydown",
         handleKeyDown
       );
-  }, [
-    onClose,
-    onPrevious,
-    onNext,
-  ]);
+  }, [onClose, onPrevious, onNext]);
 
   if (images.length === 0) return null;
 
@@ -61,6 +59,28 @@ function ImageViewer({
     <div
       className="image-viewer-backdrop"
       onClick={onClose}
+      onTouchStart={(e) => {
+        touchStartX.current =
+          e.touches[0].clientX;
+      }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current === null)
+          return;
+
+        const delta =
+          e.changedTouches[0].clientX -
+          touchStartX.current;
+
+        if (delta > 70) {
+          onPrevious();
+        }
+
+        if (delta < -70) {
+          onNext();
+        }
+
+        touchStartX.current = null;
+      }}
     >
       <button
         className="gallery-arrow left"
