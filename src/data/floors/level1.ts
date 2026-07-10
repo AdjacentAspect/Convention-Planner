@@ -278,4 +278,16 @@ export const level1Booths: Booth[] = [
       height: 2.14,
     }
   }),
+
+  createBooth({
+    id: "410",
+    table: "410",
+    priority: "low",
+    bounds: {
+      x: 26.89,
+      y: 57.07,
+      width: 2.97,
+      height: 4.37,
+    }
+  }),
 ];

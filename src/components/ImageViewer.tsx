@@ -3,7 +3,11 @@ import {
   TransformWrapper,
 } from "react-zoom-pan-pinch";
 
-import { useEffect, useRef } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type Props = {
   images: string[];
@@ -21,6 +25,9 @@ function ImageViewer({
   onClose,
 }: Props) {
   const touchStartX = useRef<number | null>(null);
+
+  const [scale, setScale] =
+  useState(1);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -64,9 +71,13 @@ function ImageViewer({
           e.changedTouches[0].clientX -
           touchStartX.current;
 
-        if (delta > 70) onPrevious();
+        if (scale <= 1.02) {
+            if (delta > 90)
+                onPrevious();
 
-        if (delta < -70) onNext();
+            if (delta < -90)
+                onNext();
+        }
 
         touchStartX.current = null;
       }}
@@ -100,9 +111,17 @@ function ImageViewer({
       </button>
 
       <TransformWrapper
-        initialScale={1}
-        minScale={1}
-        maxScale={6}
+          initialScale={1}
+          minScale={1}
+          maxScale={6}
+
+          panning={{
+            velocityDisabled: true,
+          }}
+
+          onTransform={(ref) => {
+              setScale(ref.state.scale);
+          }}
       >
         <TransformComponent>
           <img

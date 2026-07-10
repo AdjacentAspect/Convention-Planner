@@ -33,7 +33,7 @@ function BoothComponent({
           : "rgba(255,255,255,.22)",
 
     border: `${
-      window.innerWidth < 700 ? 2 : 3
+      window.innerWidth < 700 ? 1 : 3
     }px solid ${priorityColours[booth.priority]}`,
 
     boxSizing: "border-box",
