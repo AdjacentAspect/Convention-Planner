@@ -17,9 +17,7 @@ type Filter =
   | "all"
   | "high"
   | "medium"
-  | "low"
-  | "visited"
-  | "unvisited";
+  | "low";
 
 type Screen =
   | "map"
@@ -118,12 +116,6 @@ function App() {
             case "low":
               return booth.priority === "low";
 
-            case "visited":
-              return booth.visited;
-
-            case "unvisited":
-              return !booth.visited;
-
             default:
               return true;
           }
@@ -176,8 +168,8 @@ function App() {
             filter={filter}
             onFilterChange={setFilter}
             onBoothSelect={(floor, booth) => {
-              setSelectedFloor(floor);
-              setSelectedBooth(booth);
+                setSelectedFloor(floor);
+                setSelectedBooth(booth);
             }}
           />
 
@@ -186,9 +178,6 @@ function App() {
             event={event}
             onBoothClick={setSelectedBooth}
             editorMode={editorMode}
-            selectedBoothId={
-              selectedBooth?.id
-            }
           />
         </main>
       )}

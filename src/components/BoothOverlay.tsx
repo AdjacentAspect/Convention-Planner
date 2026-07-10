@@ -27,12 +27,14 @@ function BoothComponent({
     height: `${booth.bounds.height}%`,
 
     background: booth.visited
-      ? "rgba(0,0,0,0.70)"
-      : "rgba(255, 255, 255, 0.70)",
+      ? "rgba(0,0,0,.65)"
+      : window.innerWidth < 700
+          ? "rgba(255,255,255,.12)"
+          : "rgba(255,255,255,.22)",
 
-    border: `3px solid ${
-      priorityColours[booth.priority]
-    }`,
+    border: `${
+      window.innerWidth < 700 ? 2 : 3
+    }px solid ${priorityColours[booth.priority]}`,
 
     boxSizing: "border-box",
 

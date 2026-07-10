@@ -9,9 +9,7 @@ type Filter =
   | "all"
   | "high"
   | "medium"
-  | "low"
-  | "visited"
-  | "unvisited";
+  | "low";
 
 type Props = {
   event: ConventionEvent;
@@ -66,13 +64,16 @@ function FloorSelector({
   return (
     <>
       <div
-        style={{
-          position: "relative",
-          marginBottom: 14,
-        }}
+          style={{
+              position: "relative",
+              display: "grid",
+              gridTemplateColumns: "3fr 1fr auto",
+              gap: 12,
+              marginBottom: 14,
+          }}
       >
         <input
-          placeholder="Search table..."
+          placeholder="🔍 Search..."
           value={query}
           onChange={(e) =>
             setQuery(e.target.value)
@@ -84,6 +85,26 @@ function FloorSelector({
             boxSizing: "border-box",
           }}
         />
+
+        <select
+          value={selectedFloor}
+          onChange={(e) =>
+            onChange(e.target.value)
+          }
+          style={{
+            borderRadius: 12,
+            padding: 12,
+          }}
+        >
+          {event.floors.map((floor) => (
+            <option
+              key={floor.id}
+              value={floor.name}
+            >
+              {floor.name.replace("Level ", "L")}
+            </option>
+          ))}
+        </select>
 
         {results.length > 0 && (
           <div
@@ -134,24 +155,7 @@ function FloorSelector({
             )}
           </div>
         )}
-      </div>
-
-      <div className="floor-selector">
-        <select
-          value={selectedFloor}
-          onChange={(e) =>
-            onChange(e.target.value)
-          }
-        >
-          {event.floors.map((floor) => (
-            <option
-              key={floor.id}
-              value={floor.name}
-            >
-              {floor.name}
-            </option>
-          ))}
-        </select>
+        </div>
 
         <div className="filter-row">
           <button
@@ -177,7 +181,7 @@ function FloorSelector({
               onFilterChange("high")
             }
           >
-            🔴 High
+            🔴
           </button>
 
           <button
@@ -192,7 +196,7 @@ function FloorSelector({
               )
             }
           >
-            🟡 Mid
+            🟡
           </button>
 
           <button
@@ -205,40 +209,8 @@ function FloorSelector({
               onFilterChange("low")
             }
           >
-            🟢 Low
+            🟢
           </button>
-
-          <button
-            className={
-              filter === "visited"
-                ? "active"
-                : ""
-            }
-            onClick={() =>
-              onFilterChange(
-                "visited"
-              )
-            }
-          >
-            ⚫ Done
-          </button>
-
-          <button
-            className={
-              filter ===
-              "unvisited"
-                ? "active"
-                : ""
-            }
-            onClick={() =>
-              onFilterChange(
-                "unvisited"
-              )
-            }
-          >
-            ⚪ To-do
-          </button>
-        </div>
       </div>
     </>
   );

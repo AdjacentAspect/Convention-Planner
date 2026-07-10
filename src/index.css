@@ -124,30 +124,25 @@ body {
     display: inline-block;
 }
 
-.filter-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
+.filter-row{
+    display:flex;
+    gap:10px;
+
+    overflow-x:auto;
+
+    padding-bottom:6px;
 }
 
-.filter-row button {
-  flex: 1;
+.filter-row button{
 
-  padding: 10px 14px;
+    width:58px;
 
-  border: none;
+    flex:none;
+}
 
-  border-radius: 999px;
+.filter-row button:first-child{
 
-  background: #374151;
-
-  color: white;
-
-  font-size: .85rem;
-
-  transition: .15s;
-
-  cursor: pointer;
+    width:90px;
 }
 
 .filter-row button:hover {
@@ -161,37 +156,35 @@ body {
 }
 
 
-.reset-view-button {
-  position: absolute;
+.reset-view-button{
 
-  top: 16px;
+    position:absolute;
 
-  right: 16px;
+    top:84px;
 
-  width: 46px;
+    right:16px;
 
-  height: 46px;
+    width:48px;
+    height:48px;
 
-  border: none;
+    border:none;
 
-  border-radius: 50%;
+    border-radius:12px;
 
-  background: white;
+    font-size:24px;
 
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.25);
+    cursor:pointer;
 
-  cursor: pointer;
+    z-index:2000;
 
-  z-index: 2000;
+    background:white;
 
-  font-size: 20px;
-
-  transition: .15s;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
 }
 
-.reset-view-button:hover {
-  transform: scale(1.08);
+.reset-view-button:hover{
+
+    transform:scale(1.05);
 }
 
 .bottom-nav button.active {
@@ -203,6 +196,10 @@ body {
 }
 
 .nav-icon {
+  font-size:22px;
+
+  margin-bottom:2px;
+
   transition: transform 0.15s ease;
 }
 
@@ -245,6 +242,9 @@ body {
 }
 
 .bottom-nav button {
+
+  font-size:12px;
+
   cursor: pointer;
   transition:
     transform 0.15s ease,
@@ -280,7 +280,9 @@ body {
 .gallery-arrow {
   position: fixed;
 
-  top: 50%;
+  bottom: 24px;
+
+  top:auto;
 
   transform: translateY(-50%);
 
