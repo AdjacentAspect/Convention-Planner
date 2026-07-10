@@ -1,6 +1,6 @@
 export const priorityConfig = {
   high: {
-    colour: "#0bde00",
+    colour: "#08a700",
     emoji: "🟢",
     label: "High",
     short: "HIGH",

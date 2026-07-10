@@ -18,6 +18,7 @@ type Props = {
   onBoothClick: (booth: Booth | null) => void;
   editorMode: boolean;
   dimMap: boolean;
+  emphasiseBooths: boolean;
 };
 
 function MapViewer({
@@ -26,6 +27,7 @@ function MapViewer({
   onBoothClick,
   editorMode,
   dimMap,
+  emphasiseBooths,
 }: Props) {
   const currentFloor = event.floors.find(
     (f) => f.name === floor
@@ -74,6 +76,7 @@ function MapViewer({
                 <BoothOverlay
                     booths={currentFloor?.booths ?? []}
                     onBoothClick={onBoothClick}
+                    emphasiseBooths={emphasiseBooths}
                 />
               </div>
             </TransformComponent>

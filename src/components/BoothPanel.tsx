@@ -9,6 +9,9 @@ type Props = {
   booth: Booth | null;
   onClose: () => void;
   onVisited: () => void;
+  onPriorityChange: (
+    priority: Booth["priority"]
+  ) => void;
   onImageClick: (image: string) => void;
 };
 
@@ -17,6 +20,7 @@ function BoothPanel({
   booth,
   onClose,
   onVisited,
+  onPriorityChange,
   onImageClick,
 }: Props) {
   if (!open || !booth) return null;
@@ -39,8 +43,8 @@ function BoothPanel({
         <div style={badgeRow}>
           <span
             style={{
-              color: priorityConfig[booth.priority].colour,
-              fontWeight: "bold",
+              ...priorityBadge,
+              color: "white",
             }}
           >
             {priorityConfig[booth.priority].emoji}{" "}
@@ -52,6 +56,45 @@ function BoothPanel({
               ? "⚫ Visited"
               : "⚪ To-do"}
           </span>
+        </div>
+
+        <hr style={divider} />
+
+        <div style={priorityEditorStyle}>
+          <h3 style={sectionTitleStyle}>
+            Change Priority
+          </h3>
+
+          <div style={priorityButtonRowStyle}>
+            {(["high", "medium", "low"] as const).map(
+              (priority) => {
+                const active =
+                  booth.priority === priority;
+
+                return (
+                  <button
+                    key={priority}
+                    style={{
+                      ...priorityButtonStyle,
+                      borderColor:
+                        priorityConfig[priority].colour,
+                      background: active
+                        ? priorityConfig[priority].colour
+                        : "transparent",
+                      color: active
+                        ? "white"
+                        : priorityConfig[priority].colour,
+                    }}
+                    onClick={() =>
+                      onPriorityChange(priority)
+                    }
+                  >
+                    {priorityConfig[priority].short}
+                  </button>
+                );
+              }
+            )}
+          </div>
         </div>
 
         <hr style={divider} />
@@ -140,18 +183,44 @@ const priorityBadge: CSSProperties = {
   background: "#374151",
   padding: "6px 12px",
   borderRadius: 999,
+  fontWeight: 700,
 };
 
 const statusBadge: CSSProperties = {
   background: "#374151",
   padding: "6px 12px",
   borderRadius: 999,
+  fontWeight: 700,
 };
 
 const divider: CSSProperties = {
   border: 0,
   borderTop: "1px solid #374151",
   margin: "20px 0",
+};
+
+const priorityEditorStyle: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+};
+
+const sectionTitleStyle: CSSProperties = {
+  fontSize: 16,
+};
+
+const priorityButtonRowStyle: CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: 10,
+};
+
+const priorityButtonStyle: CSSProperties = {
+  padding: "12px 10px",
+  border: "2px solid",
+  borderRadius: 12,
+  fontWeight: 800,
+  cursor: "pointer",
 };
 
 const primaryButton: CSSProperties = {

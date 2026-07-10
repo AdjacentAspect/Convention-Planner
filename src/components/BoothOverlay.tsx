@@ -6,17 +6,25 @@ import { priorityColours } from "../utils/priority";
 type Props = {
   booths: Booth[];
   onBoothClick: (booth: Booth) => void;
+  emphasiseBooths: boolean;
 };
 
 type BoothComponentProps = {
   booth: Booth;
   onClick: (booth: Booth) => void;
+  emphasiseBooths: boolean;
 };
 
 function BoothComponent({
   booth,
   onClick,
+  emphasiseBooths,
 }: BoothComponentProps) {
+  const isMobile = window.innerWidth < 700;
+
+  const outlineWidth = isMobile ? 1 : 3;
+  const outerHighlightWidth = isMobile ? 1 : 4;
+
   const style: CSSProperties = {
     position: "absolute",
 
@@ -27,14 +35,14 @@ function BoothComponent({
     height: `${booth.bounds.height}%`,
 
     background: booth.visited
-      ? "rgba(0,0,0,.65)"
-      : window.innerWidth < 700
-          ? "rgba(255,255,255,.12)"
-          : "rgba(255,255,255,.22)",
+      ? "rgba(0,0,0,.45)"
+      : "transparent",
 
-    border: `${
-      window.innerWidth < 700 ? 1 : 3
-    }px solid ${priorityColours[booth.priority]}`,
+    outline: `${outlineWidth}px solid ${
+      priorityColours[booth.priority]
+    }`,
+
+    outlineOffset: 0,
 
     boxSizing: "border-box",
 
@@ -43,20 +51,37 @@ function BoothComponent({
     zIndex: 1000,
 
     transition:
-      "background .15s ease, border-color .15s ease",
+      "background .15s ease, outline .15s ease",
+  };
+
+  const outerHighlightStyle: CSSProperties = {
+    position: "absolute",
+    inset: -outerHighlightWidth,
+
+    border: `${outerHighlightWidth}px solid ${
+      priorityColours[booth.priority]
+    }`,
+
+    boxSizing: "border-box",
+    pointerEvents: "none",
   };
 
   return (
     <div
       style={style}
       onClick={() => onClick(booth)}
-    />
+    >
+      {emphasiseBooths && (
+        <div style={outerHighlightStyle} />
+      )}
+    </div>
   );
 }
 
 function BoothOverlay({
   booths,
   onBoothClick,
+  emphasiseBooths,
 }: Props) {
   return (
     <>
@@ -65,6 +90,7 @@ function BoothOverlay({
           key={booth.id}
           booth={booth}
           onClick={onBoothClick}
+          emphasiseBooths={emphasiseBooths}
         />
       ))}
     </>

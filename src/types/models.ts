@@ -53,4 +53,8 @@ export interface ConventionEvent {
 
 export interface UserProgress {
   visitedBooths: string[];
+  boothPriorities: Record<
+    string,
+    Booth["priority"]
+  >;
 }

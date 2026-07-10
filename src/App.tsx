@@ -58,6 +58,7 @@ function App() {
       if (!saved) {
         return {
           visitedBooths: [],
+          boothPriorities: {},
         };
       }
 
@@ -67,10 +68,13 @@ function App() {
         return {
           visitedBooths:
             parsed.visitedBooths ?? [],
+          boothPriorities:
+            parsed.boothPriorities ?? {},
         };
       } catch {
         return {
           visitedBooths: [],
+          boothPriorities: {},
         };
       }
     });
@@ -107,6 +111,9 @@ function App() {
             progress.visitedBooths.includes(
               booth.id
             ),
+          priority:
+            progress.boothPriorities[booth.id] ??
+            booth.priority,
         }))
         .filter((booth) => {
           switch (filter) {
@@ -141,6 +148,8 @@ function App() {
             previous.visitedBooths.filter(
               (id) => id !== selectedBooth.id
             ),
+          boothPriorities:
+            previous.boothPriorities,
         };
       }
 
@@ -149,12 +158,33 @@ function App() {
           ...previous.visitedBooths,
           selectedBooth.id,
         ],
+        boothPriorities:
+          previous.boothPriorities,
       };
     });
 
     setSelectedBooth({
       ...selectedBooth,
       visited: !selectedBooth.visited,
+    });
+  }
+
+  function changeBoothPriority(
+    priority: Booth["priority"]
+  ) {
+    if (!selectedBooth) return;
+
+    setProgress((previous) => ({
+      ...previous,
+      boothPriorities: {
+        ...previous.boothPriorities,
+        [selectedBooth.id]: priority,
+      },
+    }));
+
+    setSelectedBooth({
+      ...selectedBooth,
+      priority,
     });
   }
 
@@ -182,6 +212,7 @@ function App() {
             onBoothClick={setSelectedBooth}
             editorMode={editorMode}
             dimMap={mapWhitening}
+            emphasiseBooths={filter !== "all"}
           />
         </main>
       )}
@@ -206,6 +237,7 @@ function App() {
           onResetProgress={() =>
             setProgress({
               visitedBooths: [],
+              boothPriorities: {},
             })
           }
         />
@@ -220,6 +252,7 @@ function App() {
         open={selectedBooth !== null}
         booth={selectedBooth}
         onVisited={toggleVisited}
+        onPriorityChange={changeBoothPriority}
         onClose={() => setSelectedBooth(null)}
         onImageClick={(image) => {
           if (!selectedBooth) return;

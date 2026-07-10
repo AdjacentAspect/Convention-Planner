@@ -140,7 +140,21 @@ function ImageViewer({
         centerOnInit
         limitToBounds={false}
         doubleClick={{ disabled: true }}
-        panning={{ velocityDisabled: true }}
+        panning={{
+          velocityDisabled: false,
+        }}
+        velocityAnimation={{
+          /*
+          If it still feels too slippery, lower maxStrengthTouch to 3 or 4.
+          If it feels too dead, raise sensitivityTouch to 0.35 or maxStrengthTouch to 8. 
+          */
+          disabled: false,
+          sensitivityTouch: 0.25,
+          maxStrengthTouch: 6,
+          animationTime: 120,
+          maxAnimationTime: 180,
+          animationType: "easeOut",
+        }}
         onTransform={(ref) => {
           setScale(ref.state.scale);
         }}
