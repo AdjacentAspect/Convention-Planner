@@ -103,14 +103,22 @@ const overlayStyle: CSSProperties = {
 
 const panelStyle: CSSProperties = {
   position: "absolute",
-  top: 12,
-  right: 12,
+
+  bottom: 20,
+  right: 20,
+
   background: "#111827",
   color: "white",
-  padding: 10,
-  borderRadius: 10,
+
+  padding: 12,
+
+  borderRadius: 12,
+
   zIndex: 9999,
+
   fontSize: 13,
+
+  boxShadow: "0 4px 12px rgba(0,0,0,.4)",
 };
 
 export default EditorOverlay;

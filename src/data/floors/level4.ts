@@ -17,11 +17,11 @@ export const level4Booths: Booth[] = [
     table: "4.E.13",
     priority: "low",
     bounds: {
-      x: 20,
-      y: 20,
-      width: 8,
-      height: 6,
-    },
+      x: 65.15,
+      y: 32.99,
+      width: 1.39,
+      height: 0.98,
+    }
   }),
 
   createBooth({
@@ -29,10 +29,10 @@ export const level4Booths: Booth[] = [
     table: "4.E.14",
     priority: "high",
     bounds: {
-      x: 40,
-      y: 30,
-      width: 8,
-      height: 6,
-    },
+      x: 65.18,
+      y: 34.19,
+      width: 1.38,
+      height: 1.08,
+    }
   })
 ];

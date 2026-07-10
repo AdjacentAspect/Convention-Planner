@@ -1,52 +1,47 @@
 import type { CSSProperties } from "react";
+
 import type { Booth } from "../types/models";
+import { priorityColours } from "../utils/priorityColours";
 
 type Props = {
   booths: Booth[];
-  selectedBoothId?: string;
   onBoothClick: (booth: Booth) => void;
 };
 
 type BoothComponentProps = {
   booth: Booth;
-  selected: boolean;
   onClick: (booth: Booth) => void;
 };
 
 function BoothComponent({
   booth,
-  selected,
   onClick,
 }: BoothComponentProps) {
   const style: CSSProperties = {
     position: "absolute",
+
     left: `${booth.bounds.x}%`,
     top: `${booth.bounds.y}%`,
+
     width: `${booth.bounds.width}%`,
     height: `${booth.bounds.height}%`,
 
     background: booth.visited
-      ? "black"
-      : booth.priority,
+      ? "rgba(0,0,0,0.70)"
+      : "rgba(255, 255, 255, 0.70)",
 
-    border: selected
-      ? "4px solid #ffffff"
-      : "2px solid white",
+    border: `3px solid ${
+      priorityColours[booth.priority]
+    }`,
 
     boxSizing: "border-box",
 
-    opacity: selected ? 1 : 0.75,
-
     cursor: "pointer",
 
-    zIndex: selected ? 1001 : 1000,
-
-    transform: selected
-      ? "scale(1.08)"
-      : "scale(1)",
+    zIndex: 1000,
 
     transition:
-      "all .15s ease",
+      "background .15s ease, border-color .15s ease",
   };
 
   return (
@@ -59,7 +54,6 @@ function BoothComponent({
 
 function BoothOverlay({
   booths,
-  selectedBoothId,
   onBoothClick,
 }: Props) {
   return (
@@ -68,9 +62,6 @@ function BoothOverlay({
         <BoothComponent
           key={booth.id}
           booth={booth}
-          selected={
-            booth.id === selectedBoothId
-          }
           onClick={onBoothClick}
         />
       ))}
