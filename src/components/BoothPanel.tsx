@@ -56,10 +56,22 @@ function BoothPanel({
 
         <hr style={divider} />
 
-        <ImageGallery
-          booth={booth}
-          onImageClick={onImageClick}
-        />
+        {booth.images.length > 0 ? (
+          <ImageGallery
+            booth={booth}
+            onImageClick={onImageClick}
+          />
+        ) : (
+          <p
+            style={{
+              opacity: 0.7,
+              textAlign: "center",
+              margin: "24px 0",
+            }}
+          >
+            No catalogue images yet.
+          </p>
+        )}
 
         <button
           style={primaryButton}

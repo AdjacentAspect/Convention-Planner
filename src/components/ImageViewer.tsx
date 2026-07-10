@@ -83,7 +83,8 @@ function ImageViewer({
         </button>
 
         <div className="gallery-counter">
-          {currentIndex + 1} / {images.length}
+          Image {currentIndex + 1} of {images.length}
+          {/*{currentIndex + 1} / {images.length}*/}
         </div>
       </div>
 

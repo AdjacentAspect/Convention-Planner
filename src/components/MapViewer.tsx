@@ -15,7 +15,7 @@ import ResetViewButton from "./ResetViewButton";
 type Props = {
   floor: string;
   event: ConventionEvent;
-  onBoothClick: (booth: Booth) => void;
+  onBoothClick: (booth: Booth | null) => void;
   editorMode: boolean;
   selectedBoothId?: string;
 };
@@ -44,9 +44,10 @@ function MapViewer({
         {(utils) => (
           <>
             <ResetViewButton
-              onClick={() =>
-                utils.resetTransform()
-              }
+              onClick={() => {
+                utils.resetTransform();
+                onBoothClick(null as never);
+              }}
             />
 
             <TransformComponent
