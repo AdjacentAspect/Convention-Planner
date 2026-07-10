@@ -7,6 +7,8 @@ import BottomNavigation from "./components/BottomNavigation";
 import BoothPanel from "./components/BoothPanel";
 import ImageViewer from "./components/ImageViewer";
 
+import ProgressScreen from "./screens/ProgressScreen";
+
 import { currentEvent as initialEvent } from "./data/event";
 import type { Booth, UserProgress } from "./types/models";
 
@@ -164,10 +166,9 @@ function App() {
       )}
 
       {screen === "progress" && (
-        <main className="main-content">
-          <h2>📊 Progress</h2>
-          <p>Coming Soon</p>
-        </main>
+        <ProgressScreen
+          event={event}
+        />
       )}
 
       {screen === "settings" && (
