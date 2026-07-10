@@ -166,6 +166,9 @@ function App() {
             event={event}
             onBoothClick={setSelectedBooth}
             editorMode={editorMode}
+            selectedBoothId={
+              selectedBooth?.id
+            }
           />
         </main>
       )}

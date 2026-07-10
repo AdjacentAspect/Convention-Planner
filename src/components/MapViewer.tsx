@@ -17,6 +17,7 @@ type Props = {
   event: ConventionEvent;
   onBoothClick: (booth: Booth) => void;
   editorMode: boolean;
+  selectedBoothId?: string;
 };
 
 function MapViewer({
@@ -24,6 +25,7 @@ function MapViewer({
   event,
   onBoothClick,
   editorMode,
+  selectedBoothId,
 }: Props) {
   const currentFloor = event.floors.find(
     (f) => f.name === floor
@@ -60,11 +62,20 @@ function MapViewer({
                   className="map-image"
                 />
 
-                {editorMode && <EditorOverlay />}
+                {editorMode && (
+                  <EditorOverlay />
+                )}
 
                 <BoothOverlay
-                  booths={currentFloor?.booths ?? []}
-                  onBoothClick={onBoothClick}
+                  booths={
+                    currentFloor?.booths ?? []
+                  }
+                  selectedBoothId={
+                    selectedBoothId
+                  }
+                  onBoothClick={
+                    onBoothClick
+                  }
                 />
               </div>
             </TransformComponent>
