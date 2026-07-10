@@ -53,6 +53,28 @@ function ImageViewer({
       );
   }, [onClose, onPrevious, onNext]);
 
+  useEffect(() => {
+  if (images.length === 0) return;
+
+  function preventPagePinch(event: TouchEvent) {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  document.addEventListener(
+    "touchmove",
+    preventPagePinch,
+    { passive: false }
+  );
+
+  return () =>
+    document.removeEventListener(
+      "touchmove",
+      preventPagePinch
+    );
+}, [images.length]);
+
   if (images.length === 0) return null;
 
   return (
@@ -111,26 +133,31 @@ function ImageViewer({
       </button>
 
       <TransformWrapper
-          initialScale={1}
-          minScale={1}
-          maxScale={6}
-
-          panning={{
-            velocityDisabled: true,
-          }}
-
-          onTransform={(ref) => {
-              setScale(ref.state.scale);
-          }}
+        key={images[currentIndex]}
+        initialScale={1}
+        minScale={1}
+        maxScale={6}
+        centerOnInit
+        limitToBounds={false}
+        doubleClick={{ disabled: true }}
+        panning={{ velocityDisabled: true }}
+        onTransform={(ref) => {
+          setScale(ref.state.scale);
+        }}
       >
-        <TransformComponent>
-          <img
-            src={images[currentIndex]}
-            className="image-viewer-image"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          />
+        <TransformComponent
+          wrapperClass="image-transform-wrapper"
+          contentClass="image-transform-content"
+        >
+          <div
+            className="image-zoom-frame"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={images[currentIndex]}
+              className="image-viewer-image"
+            />
+          </div>
         </TransformComponent>
       </TransformWrapper>
 

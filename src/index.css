@@ -266,6 +266,29 @@ body {
   animation: fadeIn 0.18s ease-out;
 }
 
+.image-viewer-backdrop {
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
+.image-transform-wrapper {
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: visible !important;
+  touch-action: none;
+}
+
+.image-transform-content {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  touch-action: none;
+}
+
 .image-zoom-frame {
   display: inline-flex;
 
