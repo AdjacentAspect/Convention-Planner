@@ -8,6 +8,7 @@ import BoothPanel from "./components/BoothPanel";
 import ImageViewer from "./components/ImageViewer";
 
 import ProgressScreen from "./screens/ProgressScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 import { currentEvent as initialEvent } from "./data/event";
 import type { Booth, UserProgress } from "./types/models";
@@ -30,6 +31,9 @@ const STORAGE_KEY = `${initialEvent.id}-progress`;
 function App() {
   const [screen, setScreen] =
     useState<Screen>("map");
+
+  const [editorMode, setEditorMode] =
+    useState(false);
 
   const [selectedFloor, setSelectedFloor] =
     useState("Level 1");
@@ -161,6 +165,7 @@ function App() {
             floor={selectedFloor}
             event={event}
             onBoothClick={setSelectedBooth}
+            editorMode={editorMode}
           />
         </main>
       )}
@@ -172,10 +177,18 @@ function App() {
       )}
 
       {screen === "settings" && (
-        <main className="main-content">
-          <h2>⚙️ Settings</h2>
-          <p>Coming Soon</p>
-        </main>
+        <SettingsScreen
+          editorMode={editorMode}
+          onToggleEditorMode={() =>
+            setEditorMode((previous) => !previous)
+          }
+          progress={progress}
+          onResetProgress={() =>
+            setProgress({
+              visitedBooths: [],
+            })
+          }
+        />
       )}
 
       <BottomNavigation
