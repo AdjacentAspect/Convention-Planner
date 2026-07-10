@@ -18,51 +18,64 @@ function BoothPanel({
   onVisited,
   onImageClick,
 }: Props) {
-  if (!open) return null;
+  if (!open || !booth) return null;
 
   return (
-    <div style={backdropStyle}>
-      <div style={sheetStyle}>
+    <div
+      style={backdropStyle}
+      onClick={onClose}
+    >
+      <div
+        style={sheetStyle}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div style={handleStyle} />
 
-        <h2 style={{ marginBottom: 6 }}>
-          {booth?.table}
+        <h2 style={titleStyle}>
+          {booth.table}
         </h2>
 
-        <p style={{ marginBottom: 4 }}>
-          {booth?.priority === "high" && "🔴 High Priority"}
-          {booth?.priority === "medium" && "🟡 Medium Priority"}
-          {booth?.priority === "low" && "🟢 Low Priority"}
-        </p>
+        <div style={badgeRow}>
+          <span style={priorityBadge}>
+            {booth.priority === "high" &&
+              "🔴 High"}
 
-        <p style={{ marginBottom: 20 }}>
-          <strong>Status:</strong>{" "}
-          {booth?.visited
-            ? "⚫ Visited"
-            : "🟢 Not Visited"}
-        </p>
+            {booth.priority === "medium" &&
+              "🟡 Medium"}
+
+            {booth.priority === "low" &&
+              "🟢 Low"}
+          </span>
+
+          <span style={statusBadge}>
+            {booth.visited
+              ? "⚫ Visited"
+              : "⚪ Todo"}
+          </span>
+        </div>
+
+        <hr style={divider} />
 
         <ImageGallery
           booth={booth}
           onImageClick={onImageClick}
         />
 
-        
         <button
+          style={primaryButton}
           onClick={() => {
             onVisited();
             onClose();
           }}
-          style={visitedButton}
         >
-          {booth?.visited
+          {booth.visited
             ? "↩️ Mark Unvisited"
             : "✅ Mark Visited"}
         </button>
 
         <button
+          style={secondaryButton}
           onClick={onClose}
-          style={closeButton}
         >
           Close
         </button>
@@ -74,7 +87,7 @@ function BoothPanel({
 const backdropStyle: CSSProperties = {
   position: "fixed",
   inset: 0,
-  background: "rgba(0,0,0,0.25)",
+  background: "rgba(0,0,0,.35)",
   display: "flex",
   alignItems: "flex-end",
   zIndex: 9999,
@@ -84,30 +97,72 @@ const sheetStyle: CSSProperties = {
   width: "100%",
   background: "#1f2937",
   color: "white",
-  borderTopLeftRadius: 18,
-  borderTopRightRadius: 18,
+  borderTopLeftRadius: 28,
+  borderTopRightRadius: 28,
   padding: 24,
-  minHeight: 220,
+  maxHeight: "85vh",
+  overflowY: "auto",
+  animation: "slideUp .2s ease-out",
 };
 
 const handleStyle: CSSProperties = {
   width: 60,
   height: 6,
-  background: "#666",
-  borderRadius: 99,
+  background: "#6b7280",
+  borderRadius: 999,
   margin: "0 auto 20px",
 };
 
-const visitedButton: CSSProperties = {
-  width: "100%",
-  padding: 12,
-  marginTop: 20,
+const titleStyle: CSSProperties = {
+  marginBottom: 12,
 };
 
-const closeButton: CSSProperties = {
+const badgeRow: CSSProperties = {
+  display: "flex",
+  gap: 12,
+  marginBottom: 20,
+  flexWrap: "wrap",
+};
+
+const priorityBadge: CSSProperties = {
+  background: "#374151",
+  padding: "6px 12px",
+  borderRadius: 999,
+};
+
+const statusBadge: CSSProperties = {
+  background: "#374151",
+  padding: "6px 12px",
+  borderRadius: 999,
+};
+
+const divider: CSSProperties = {
+  border: 0,
+  borderTop: "1px solid #374151",
+  margin: "20px 0",
+};
+
+const primaryButton: CSSProperties = {
   width: "100%",
-  padding: 12,
+  marginTop: 24,
+  padding: 14,
+  border: "none",
+  borderRadius: 12,
+  background: "#2563eb",
+  color: "white",
+  fontWeight: 600,
+  cursor: "pointer",
+};
+
+const secondaryButton: CSSProperties = {
+  width: "100%",
   marginTop: 12,
+  padding: 14,
+  border: "none",
+  borderRadius: 12,
+  background: "#374151",
+  color: "white",
+  cursor: "pointer",
 };
 
 export default BoothPanel;
