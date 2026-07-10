@@ -1,5 +1,7 @@
 import type { ConventionEvent } from "../types/models";
 
+import { priorityConfig } from "../utils/priorityColours";
+
 type Props = {
   event: ConventionEvent;
 };
@@ -69,22 +71,22 @@ function ProgressScreen({ event }: Props) {
 
       <div style={statsContainer}>
         <StatCard
-          colour="🔴"
-          label="High"
+          colour={priorityConfig.high.emoji}
+          label={priorityConfig.high.label}
           current={visitedHigh.length}
           total={high.length}
         />
 
         <StatCard
-          colour="🟡"
-          label="Medium"
+          colour={priorityConfig.medium.emoji}
+          label={priorityConfig.medium.label}
           current={visitedMedium.length}
           total={medium.length}
         />
 
         <StatCard
-          colour="🟢"
-          label="Low"
+          colour={priorityConfig.low.emoji}
+          label={priorityConfig.low.label}
           current={visitedLow.length}
           total={low.length}
         />

@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 
+import { priorityConfig } from "../utils/priorityColours";
+
 import type {
   Booth,
   ConventionEvent,
@@ -181,7 +183,7 @@ function FloorSelector({
               onFilterChange("high")
             }
           >
-            🔴
+            {priorityConfig.high.emoji}
           </button>
 
           <button
@@ -196,7 +198,7 @@ function FloorSelector({
               )
             }
           >
-            🟡
+            {priorityConfig.medium.emoji}
           </button>
 
           <button
@@ -209,7 +211,7 @@ function FloorSelector({
               onFilterChange("low")
             }
           >
-            🟢
+            {priorityConfig.low.emoji}
           </button>
       </div>
     </>

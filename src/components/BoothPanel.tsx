@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { Booth } from "../types/models";
 
 import ImageGallery from "./BoothDetailsPanel/ImageGallery";
+import { priorityConfig } from "../utils/priorityColours";
 
 type Props = {
   open: boolean;
@@ -36,15 +37,14 @@ function BoothPanel({
         </h2>
 
         <div style={badgeRow}>
-          <span style={priorityBadge}>
-            {booth.priority === "high" &&
-              "🔴 High"}
-
-            {booth.priority === "medium" &&
-              "🟡 Medium"}
-
-            {booth.priority === "low" &&
-              "🟢 Low"}
+          <span
+            style={{
+              color: priorityConfig[booth.priority].colour,
+              fontWeight: "bold",
+            }}
+          >
+            {priorityConfig[booth.priority].emoji}{" "}
+            {priorityConfig[booth.priority].label}
           </span>
 
           <span style={statusBadge}>

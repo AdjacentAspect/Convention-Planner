@@ -124,35 +124,71 @@ body {
     display: inline-block;
 }
 
-.filter-row{
-    display:flex;
-    gap:10px;
+.filter-row {
+    display: flex;
+    justify-content: center;
 
-    overflow-x:auto;
+    gap: 10px;
 
-    padding-bottom:6px;
+    margin: 12px 0 16px;
+
+    flex-wrap: nowrap;
 }
 
-.filter-row button{
+.filter-row button {
 
-    width:58px;
+    width: 58px;
+    height: 44px;
 
-    flex:none;
+    border: none;
+
+    border-radius: 999px;
+
+    background: white;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.12);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: all .15s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.filter-row button:first-child{
+.filter-row button:first-child {
 
-    width:90px;
+    width: 84px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: .4px;
 }
 
 .filter-row button:hover {
-  background: #4b5563;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.18);
 }
 
 .filter-row button.active {
-  background: #2563eb;
 
-  transform: translateY(-1px);
+    transform: translateY(-2px);
+
+    transform: scale(.95);
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.18);
+
+    outline: 3px solid #2563eb;
 }
 
 
