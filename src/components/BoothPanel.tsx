@@ -3,8 +3,6 @@ import type { Booth } from "../types/models";
 
 import ImageGallery from "./BoothDetailsPanel/ImageGallery";
 
-import { priorityColours } from "../utils/priorityColours";
-
 type Props = {
   open: boolean;
   booth: Booth | null;
@@ -39,13 +37,20 @@ function BoothPanel({
 
         <div style={badgeRow}>
           <span style={priorityBadge}>
-            priorityColours[booth.priority]
+            {booth.priority === "high" &&
+              "🔴 High"}
+
+            {booth.priority === "medium" &&
+              "🟡 Medium"}
+
+            {booth.priority === "low" &&
+              "🟢 Low"}
           </span>
 
           <span style={statusBadge}>
             {booth.visited
               ? "⚫ Visited"
-              : "⚪ Todo"}
+              : "⚪ To-do"}
           </span>
         </div>
 
