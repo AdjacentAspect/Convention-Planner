@@ -5,16 +5,18 @@ import img3 from "../../assets/catalogues/4e14/img3.jpg";
 
 import type { Booth } from "../../types/models";
 
+const boothTemplate: Pick<Booth, "priority" | "visited"> = {
+  priority: "low",
+  visited: false,
+};
+
 export const level4Booths: Booth[] = [
   {
+    ...boothTemplate,
+
     id: "4E13",
 
     table: "4.E.13",
-
-    priority: "low",
-
-    visited: false,
-    
 
     bounds: {
       x: 20,
@@ -29,13 +31,13 @@ export const level4Booths: Booth[] = [
   },
 
   {
+    ...boothTemplate,
+
     id: "4E14",
 
     table: "4.E.14",
 
     priority: "high",
-
-    visited: false,
 
     bounds: {
       x: 40,
