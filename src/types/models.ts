@@ -11,12 +11,6 @@ export interface BoothBounds {
   height: number;
 }
 
-export interface WishlistItem {
-  id: string;
-  name: string;
-  purchased: boolean;
-}
-
 export interface Booth {
 
   id: string;

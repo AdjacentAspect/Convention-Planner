@@ -5,96 +5,41 @@ import level2 from "../assets/maps/level2.png";
 import level3 from "../assets/maps/level3.png";
 import level4 from "../assets/maps/level4.png";
 
-import img1 from "../assets/catalogues/4e14/img1.jpg";
-import img2 from "../assets/catalogues/4e14/img2.jpg";
-import img3 from "../assets/catalogues/4e14/img3.jpg";
-
+import { level1Booths } from "./floors/level1";
+import { level2Booths } from "./floors/level2";
+import { level3Booths } from "./floors/level3";
+import { level4Booths } from "./floors/level4";
 
 export const currentEvent: ConventionEvent = {
-
   id: "smash2026",
-
   name: "SMASH! Sydney",
-
   venue: "ICC Sydney",
-
   year: 2026,
 
   floors: [
-
     {
-
       id: "1",
-
       name: "Level 1",
-
       image: level1,
-
-      booths: []
-
+      booths: level1Booths,
     },
-
     {
-
       id: "2",
-
       name: "Level 2",
-
       image: level2,
-
-      booths: []
-
+      booths: level2Booths,
     },
-
     {
-
       id: "3",
-
       name: "Level 3",
-
       image: level3,
-
-      booths: []
-
+      booths: level3Booths,
     },
-
     {
-
       id: "4",
-
       name: "Level 4",
-
       image: level4,
-
-      booths: [
-
-        {
-            id: "4E14",
-
-            table: "4.E.14",
-
-            priority: "high",
-
-            visited: false,
-
-            bounds: {
-                x: 40,
-                y: 30,
-                width: 8,
-                height: 6,
-            },
-
-            images: [
-              img1,
-              img2,
-              img3,
-            ],
-        }
-
-      ]
-
-    }
-
-  ]
-
+      booths: level4Booths,
+    },
+  ],
 };
