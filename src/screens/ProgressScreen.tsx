@@ -46,56 +46,126 @@ function ProgressScreen({ event }: Props) {
 
   return (
     <main className="main-content">
-      <h2>Convention Progress</h2>
+      <h2>📊 Progress</h2>
 
-      <div
-        style={{
-          marginTop: 24,
-        }}
-      >
-        <h1>{overall}%</h1>
+      <div style={heroCard}>
+        <div style={percent}>
+          {overall}%
+        </div>
 
-        <progress
-          value={visited.length}
-          max={booths.length}
-          style={{
-            width: "100%",
-            height: 16,
-          }}
-        />
+        <div style={barBackground}>
+          <div
+            style={{
+              ...barFill,
+              width: `${overall}%`,
+            }}
+          />
+        </div>
 
-        <p
-          style={{
-            marginTop: 12,
-          }}
-        >
+        <p style={subtitle}>
           {visited.length} / {booths.length} booths visited
         </p>
       </div>
 
-      <div
-        style={{
-          marginTop: 32,
-          lineHeight: 2,
-        }}
-      >
-        <p>
-          🔴 High: {visitedHigh.length} /{" "}
-          {high.length}
-        </p>
+      <div style={statsContainer}>
+        <StatCard
+          colour="🔴"
+          label="High"
+          current={visitedHigh.length}
+          total={high.length}
+        />
 
-        <p>
-          🟡 Medium: {visitedMedium.length} /{" "}
-          {medium.length}
-        </p>
+        <StatCard
+          colour="🟡"
+          label="Medium"
+          current={visitedMedium.length}
+          total={medium.length}
+        />
 
-        <p>
-          🟢 Low: {visitedLow.length} /{" "}
-          {low.length}
-        </p>
+        <StatCard
+          colour="🟢"
+          label="Low"
+          current={visitedLow.length}
+          total={low.length}
+        />
       </div>
     </main>
   );
 }
+
+type StatCardProps = {
+  colour: string;
+  label: string;
+  current: number;
+  total: number;
+};
+
+function StatCard({
+  colour,
+  label,
+  current,
+  total,
+}: StatCardProps) {
+  return (
+    <div style={card}>
+      <h3>
+        {colour} {label}
+      </h3>
+
+      <p
+        style={{
+          fontSize: 26,
+          margin: "8px 0",
+        }}
+      >
+        {current} / {total}
+      </p>
+    </div>
+  );
+}
+
+const heroCard = {
+  background: "#1f2937",
+  borderRadius: 20,
+  padding: 24,
+  marginTop: 20,
+  textAlign: "center" as const,
+};
+
+const percent = {
+  fontSize: 52,
+  fontWeight: 700,
+};
+
+const subtitle = {
+  marginTop: 12,
+  color: "#9ca3af",
+};
+
+const barBackground = {
+  height: 14,
+  background: "#374151",
+  borderRadius: 999,
+  marginTop: 20,
+  overflow: "hidden",
+};
+
+const barFill = {
+  height: "100%",
+  background: "#2563eb",
+};
+
+const statsContainer = {
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: 16,
+  marginTop: 24,
+};
+
+const card = {
+  background: "#1f2937",
+  borderRadius: 18,
+  padding: 18,
+};
 
 export default ProgressScreen;
