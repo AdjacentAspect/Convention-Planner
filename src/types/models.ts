@@ -12,12 +12,13 @@ export interface BoothBounds {
 }
 
 export interface Booth {
-
   id: string;
-
   table: string;
 
-  priority: BoothPriority;
+  priority:
+    | "high"
+    | "medium"
+    | "low";
 
   visited: boolean;
 
