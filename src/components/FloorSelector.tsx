@@ -180,7 +180,11 @@ function FloorSelector({
                 : ""
             }
             style={{
-              borderColor: priorityConfig.high.colour,
+              borderColor:
+                filter === "high"
+                  ? "white"
+                  : priorityConfig.high.colour,
+
               color: priorityConfig.high.colour,
             }}
             onClick={() =>
@@ -197,7 +201,11 @@ function FloorSelector({
                 : ""
             }
             style={{
-              borderColor: priorityConfig.medium.colour,
+              borderColor:
+                filter === "medium"
+                  ? "white"
+                  : priorityConfig.medium.colour,
+
               color: priorityConfig.medium.colour,
             }}
             onClick={() =>
@@ -214,7 +222,11 @@ function FloorSelector({
                 : ""
             }
             style={{
-              borderColor: priorityConfig.low.colour,
+              borderColor:
+                filter === "low"
+                  ? "white"
+                  : priorityConfig.low.colour,
+
               color: priorityConfig.low.colour,
             }}
             onClick={() =>
