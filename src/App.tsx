@@ -75,6 +75,18 @@ function App() {
     });
 
   useEffect(() => {
+    setSelectedBooth(null);
+  }, [selectedFloor]);
+
+  useEffect(() => {
+    setSelectedBooth(null);
+  }, [filter]);
+
+  useEffect(() => {
+    setSelectedBooth(null);
+  }, [screen]);
+
+  useEffect(() => {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify(progress)
@@ -158,10 +170,15 @@ function App() {
       {screen === "map" && (
         <main className="main-content">
           <FloorSelector
+            event={event}
             selectedFloor={selectedFloor}
             onChange={setSelectedFloor}
             filter={filter}
             onFilterChange={setFilter}
+            onBoothSelect={(floor, booth) => {
+              setSelectedFloor(floor);
+              setSelectedBooth(booth);
+            }}
           />
 
           <MapViewer
