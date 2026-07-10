@@ -1,25 +1,41 @@
 import {
-  TransformWrapper,
   TransformComponent,
+  TransformWrapper,
 } from "react-zoom-pan-pinch";
 
 import { useEffect } from "react";
 
 type Props = {
-  image: string | null;
+  images: string[];
+  currentIndex: number;
+  onPrevious: () => void;
+  onNext: () => void;
   onClose: () => void;
 };
 
 function ImageViewer({
-  image,
+  images,
+  currentIndex,
+  onPrevious,
+  onNext,
   onClose,
 }: Props) {
   useEffect(() => {
-    if (!image) return;
+    function handleKeyDown(
+      event: KeyboardEvent
+    ) {
+      switch (event.key) {
+        case "Escape":
+          onClose();
+          break;
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        onClose();
+        case "ArrowLeft":
+          onPrevious();
+          break;
+
+        case "ArrowRight":
+          onNext();
+          break;
       }
     }
 
@@ -33,30 +49,38 @@ function ImageViewer({
         "keydown",
         handleKeyDown
       );
-  }, [image, onClose]);
+  }, [
+    onClose,
+    onPrevious,
+    onNext,
+  ]);
 
-  if (!image) return null;
+  if (images.length === 0) return null;
 
   return (
     <div
       className="image-viewer-backdrop"
       onClick={onClose}
     >
+      <button
+        className="gallery-arrow left"
+        disabled={currentIndex === 0}
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrevious();
+        }}
+      >
+        ◀
+      </button>
+
       <TransformWrapper
         initialScale={1}
         minScale={1}
         maxScale={6}
-        doubleClick={{
-          mode: "zoomIn",
-        }}
-        wheel={{
-          step: 0.2,
-        }}
       >
         <TransformComponent>
           <img
-            src={image}
-            alt=""
+            src={images[currentIndex]}
             className="image-viewer-image"
             onClick={(e) =>
               e.stopPropagation()
@@ -64,6 +88,24 @@ function ImageViewer({
           />
         </TransformComponent>
       </TransformWrapper>
+
+      <button
+        className="gallery-arrow right"
+        disabled={
+          currentIndex ===
+          images.length - 1
+        }
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+      >
+        ▶
+      </button>
+
+      <div className="gallery-counter">
+        {currentIndex + 1} / {images.length}
+      </div>
     </div>
   );
 }

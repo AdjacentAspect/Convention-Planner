@@ -276,3 +276,66 @@ body {
     opacity: 1;
   }
 }
+
+.gallery-arrow {
+  position: fixed;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 56px;
+
+  height: 56px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: rgba(255,255,255,.15);
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  z-index: 10001;
+
+  backdrop-filter: blur(8px);
+}
+
+.gallery-arrow.left {
+  left: 24px;
+}
+
+.gallery-arrow.right {
+  right: 24px;
+}
+
+.gallery-arrow:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.gallery-counter {
+  position: fixed;
+
+  top: 28px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background: rgba(0,0,0,.45);
+
+  color: white;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  font-weight: 600;
+
+  z-index: 10001;
+}

@@ -44,8 +44,11 @@ function App() {
   const [selectedBooth, setSelectedBooth] =
     useState<Booth | null>(null);
 
-  const [selectedImage, setSelectedImage] =
-    useState<string | null>(null);
+  const [galleryImages, setGalleryImages] =
+  useState<string[]>([]);
+
+  const [currentImageIndex, setCurrentImageIndex] =
+    useState(0);
 
   const [progress, setProgress] =
     useState<UserProgress>(() => {
@@ -204,12 +207,37 @@ function App() {
         booth={selectedBooth}
         onVisited={toggleVisited}
         onClose={() => setSelectedBooth(null)}
-        onImageClick={setSelectedImage}
+        onImageClick={(image) => {
+          if (!selectedBooth) return;
+
+          const index =
+            selectedBooth.images.indexOf(image);
+
+          setGalleryImages(selectedBooth.images);
+          setCurrentImageIndex(index);
+        }}
       />
 
       <ImageViewer
-        image={selectedImage}
-        onClose={() => setSelectedImage(null)}
+        images={galleryImages}
+        currentIndex={currentImageIndex}
+        onPrevious={() =>
+          setCurrentImageIndex((previous) =>
+            Math.max(previous - 1, 0)
+          )
+        }
+        onNext={() =>
+          setCurrentImageIndex((previous) =>
+            Math.min(
+              previous + 1,
+              galleryImages.length - 1
+            )
+          )
+        }
+        onClose={() => {
+          setGalleryImages([]);
+          setCurrentImageIndex(0);
+        }}
       />
     </div>
   );
