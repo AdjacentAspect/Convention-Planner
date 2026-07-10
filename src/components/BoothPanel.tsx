@@ -25,13 +25,17 @@ function BoothPanel({
       <div style={sheetStyle}>
         <div style={handleStyle} />
 
-        <h2>{booth?.table}</h2>
+        <h2 style={{ marginBottom: 6 }}>
+          {booth?.table}
+        </h2>
 
-        <p>
-            Priority: {booth?.priority}
+        <p style={{ marginBottom: 4 }}>
+          {booth?.priority === "high" && "🔴 High Priority"}
+          {booth?.priority === "medium" && "🟡 Medium Priority"}
+          {booth?.priority === "low" && "🟢 Low Priority"}
         </p>
 
-        <p>
+        <p style={{ marginBottom: 20 }}>
           <strong>Status:</strong>{" "}
           {booth?.visited
             ? "⚫ Visited"

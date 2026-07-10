@@ -9,7 +9,7 @@ import type {
 } from "../types/models";
 
 import BoothOverlay from "./BoothOverlay";
-import DeveloperOverlay from "./DeveloperOverlay";
+import EditorOverlay from "./EditorOverlay";
 
 type Props = {
   floor: string;
@@ -49,7 +49,7 @@ function MapViewer({
               className="map-image"
             />
 
-            <DeveloperOverlay />
+            <EditorOverlay />
 
             <BoothOverlay
               booths={currentFloor?.booths ?? []}

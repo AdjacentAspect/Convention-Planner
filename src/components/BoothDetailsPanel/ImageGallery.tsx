@@ -1,9 +1,5 @@
 import type { Booth } from "../../types/models";
 
-type Props = {
-  booth: Booth | null;
-};
-
 type ImageGalleryProps = {
   booth: Booth | null;
   onImageClick?: (image: string) => void;
@@ -38,9 +34,18 @@ function ImageGallery({
               alt={`Page ${index + 1}`}
               style={{
                 width: "100%",
-                borderRadius: 8,
+                height: 170,
+
+                objectFit: "cover",
+
+                borderRadius: 14,
+
                 cursor: "pointer",
-                border: "2px solid #444",
+
+                border: "1px solid #444",
+
+                boxShadow:
+                  "0 4px 14px rgba(0,0,0,.25)",
               }}
               onClick={() => onImageClick?.(image)}
             />
