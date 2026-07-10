@@ -9,11 +9,14 @@ const imageModules = import.meta.glob(
 export function getBoothImages(
   boothId: string
 ): string[] {
-  const folder = boothId.toLowerCase();
+  const folder =
+    boothId.toLowerCase();
 
   return Object.entries(imageModules)
     .filter(([path]) =>
-      path.includes(`/catalogues/${folder}/`)
+      path.includes(
+        `/catalogues/${folder}/`
+      )
     )
     .sort(([a], [b]) =>
       a.localeCompare(
