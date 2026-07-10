@@ -10,6 +10,7 @@ import type {
 
 import BoothOverlay from "./BoothOverlay";
 import EditorOverlay from "./EditorOverlay";
+import ResetViewButton from "./ResetViewButton";
 
 type Props = {
   floor: string;
@@ -36,27 +37,37 @@ function MapViewer({
         wheel={{ step: 0.01 }}
         pinch={{ step: 5 }}
       >
-        <TransformComponent
-          wrapperStyle={{
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <div className="map-container">
-            <img
-              src={currentFloor?.image}
-              alt={floor}
-              className="map-image"
+        {(utils) => (
+          <>
+            <ResetViewButton
+              onClick={() =>
+                utils.resetTransform()
+              }
             />
 
-            <EditorOverlay />
+            <TransformComponent
+              wrapperStyle={{
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <div className="map-container">
+                <img
+                  src={currentFloor?.image}
+                  alt={floor}
+                  className="map-image"
+                />
 
-            <BoothOverlay
-              booths={currentFloor?.booths ?? []}
-              onBoothClick={onBoothClick}
-            />
-          </div>
-        </TransformComponent>
+                <EditorOverlay />
+
+                <BoothOverlay
+                  booths={currentFloor?.booths ?? []}
+                  onBoothClick={onBoothClick}
+                />
+              </div>
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
     </div>
   );
