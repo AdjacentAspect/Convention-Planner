@@ -217,3 +217,62 @@ body {
     opacity: 1;
   }
 }
+
+.image-viewer-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.95);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10000;
+
+  animation: fadeIn 0.18s ease-out;
+}
+
+.image-viewer-image {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.bottom-nav button {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.bottom-nav button:hover {
+  transform: translateY(-2px);
+}
+
+.bottom-nav button:active {
+  transform: scale(0.95);
+}
+
+.filter-row button:active {
+  transform: scale(0.96);
+}
+
+.reset-view-button:active {
+  transform: scale(0.92);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

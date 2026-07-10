@@ -23,7 +23,10 @@ function ImageViewer({
       }
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
 
     return () =>
       window.removeEventListener(
@@ -36,16 +39,8 @@ function ImageViewer({
 
   return (
     <div
+      className="image-viewer-backdrop"
       onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.95)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 10000,
-      }}
     >
       <TransformWrapper
         initialScale={1}
@@ -62,12 +57,10 @@ function ImageViewer({
           <img
             src={image}
             alt=""
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              maxWidth: "95vw",
-              maxHeight: "95vh",
-              objectFit: "contain",
-            }}
+            className="image-viewer-image"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           />
         </TransformComponent>
       </TransformWrapper>
