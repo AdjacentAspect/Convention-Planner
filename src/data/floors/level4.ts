@@ -1,9 +1,6 @@
-import img0 from "../../assets/catalogues/4e13/img0.jpg";
-import img1 from "../../assets/catalogues/4e14/img1.jpg";
-import img2 from "../../assets/catalogues/4e14/img2.jpg";
-import img3 from "../../assets/catalogues/4e14/img3.jpg";
-
 import type { Booth } from "../../types/models";
+
+import { getBoothImages } from "../getBoothImages";
 
 const boothTemplate: Pick<Booth, "priority" | "visited"> = {
   priority: "low",
@@ -25,9 +22,7 @@ export const level4Booths: Booth[] = [
       height: 6,
     },
 
-    images: [
-      img0
-    ],
+      images: getBoothImages("4e13"),
   },
 
   {
@@ -46,10 +41,6 @@ export const level4Booths: Booth[] = [
       height: 6,
     },
 
-    images: [
-      img1,
-      img2,
-      img3,
-    ],
+    images: getBoothImages("4e14"),
   },
 ];
