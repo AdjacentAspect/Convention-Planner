@@ -18,9 +18,17 @@ type Filter =
   | "visited"
   | "unvisited";
 
+type Screen =
+  | "map"
+  | "progress"
+  | "settings";
+
 const STORAGE_KEY = `${initialEvent.id}-progress`;
 
 function App() {
+  const [screen, setScreen] =
+    useState<Screen>("map");
+
   const [selectedFloor, setSelectedFloor] =
     useState("Level 1");
 
@@ -138,22 +146,41 @@ function App() {
     <div className="app">
       <Header />
 
-      <main className="main-content">
-        <FloorSelector
-          selectedFloor={selectedFloor}
-          onChange={setSelectedFloor}
-          filter={filter}
-          onFilterChange={setFilter}
-        />
+      {screen === "map" && (
+        <main className="main-content">
+          <FloorSelector
+            selectedFloor={selectedFloor}
+            onChange={setSelectedFloor}
+            filter={filter}
+            onFilterChange={setFilter}
+          />
 
-        <MapViewer
-          floor={selectedFloor}
-          event={event}
-          onBoothClick={setSelectedBooth}
-        />
-      </main>
+          <MapViewer
+            floor={selectedFloor}
+            event={event}
+            onBoothClick={setSelectedBooth}
+          />
+        </main>
+      )}
 
-      <BottomNavigation />
+      {screen === "progress" && (
+        <main className="main-content">
+          <h2>📊 Progress</h2>
+          <p>Coming Soon</p>
+        </main>
+      )}
+
+      {screen === "settings" && (
+        <main className="main-content">
+          <h2>⚙️ Settings</h2>
+          <p>Coming Soon</p>
+        </main>
+      )}
+
+      <BottomNavigation
+        current={screen}
+        onNavigate={setScreen}
+      />
 
       <BoothPanel
         open={selectedBooth !== null}

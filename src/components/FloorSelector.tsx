@@ -11,7 +11,6 @@ type Filter =
 type Props = {
   selectedFloor: string;
   onChange: (floor: string) => void;
-
   filter: Filter;
   onFilterChange: (filter: Filter) => void;
 };
@@ -50,35 +49,35 @@ function FloorSelector({
           className={filter === "high" ? "active" : ""}
           onClick={() => onFilterChange("high")}
         >
-          🔴
+          🔴 High
         </button>
 
         <button
           className={filter === "medium" ? "active" : ""}
           onClick={() => onFilterChange("medium")}
         >
-          🟡
+          🟡 Mid
         </button>
 
         <button
           className={filter === "low" ? "active" : ""}
           onClick={() => onFilterChange("low")}
         >
-          🟢
+          🟢 Low
         </button>
 
         <button
           className={filter === "visited" ? "active" : ""}
           onClick={() => onFilterChange("visited")}
         >
-          ⚫
+          ⚫ Done
         </button>
 
         <button
           className={filter === "unvisited" ? "active" : ""}
           onClick={() => onFilterChange("unvisited")}
         >
-          ⚪
+          ⚪ Todo
         </button>
       </div>
     </div>
