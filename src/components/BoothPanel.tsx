@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { Booth } from "../types/models";
 
 import ImageGallery from "./BoothDetailsPanel/ImageGallery";
-import { priorityConfig } from "../utils/priorityColours";
+import { priorityConfig } from "../utils/priority";
 
 type Props = {
   open: boolean;

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { priorityConfig } from "../utils/priorityColours";
+import { priorityConfig } from "../utils/priority";
 
 import type {
   Booth,
@@ -170,7 +170,7 @@ function FloorSelector({
               onFilterChange("all")
             }
           >
-            All
+            ALL
           </button>
 
           <button
@@ -179,11 +179,15 @@ function FloorSelector({
                 ? "active"
                 : ""
             }
+            style={{
+              borderColor: priorityConfig.high.colour,
+              color: priorityConfig.high.colour,
+            }}
             onClick={() =>
               onFilterChange("high")
             }
           >
-            {priorityConfig.high.emoji}
+            {priorityConfig.high.short}
           </button>
 
           <button
@@ -192,13 +196,15 @@ function FloorSelector({
                 ? "active"
                 : ""
             }
+            style={{
+              borderColor: priorityConfig.medium.colour,
+              color: priorityConfig.medium.colour,
+            }}
             onClick={() =>
-              onFilterChange(
-                "medium"
-              )
+              onFilterChange("medium")
             }
           >
-            {priorityConfig.medium.emoji}
+            {priorityConfig.medium.short}
           </button>
 
           <button
@@ -207,13 +213,17 @@ function FloorSelector({
                 ? "active"
                 : ""
             }
+            style={{
+              borderColor: priorityConfig.low.colour,
+              color: priorityConfig.low.colour,
+            }}
             onClick={() =>
               onFilterChange("low")
             }
           >
-            {priorityConfig.low.emoji}
+            {priorityConfig.low.short}
           </button>
-      </div>
+        </div>
     </>
   );
 }

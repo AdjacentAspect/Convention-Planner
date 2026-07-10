@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 import type { Booth } from "../types/models";
-import { priorityColours } from "../utils/priorityColours";
+import { priorityColours } from "../utils/priority";
 
 type Props = {
   booths: Booth[];

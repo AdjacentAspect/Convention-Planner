@@ -1,20 +1,23 @@
 export const priorityConfig = {
   high: {
-    colour: "#04ff00",
-    emoji: "🟢",
+    colour: "#ef4444",
+    emoji: "🔴",
     label: "High",
+    short: "HIGH",
   },
 
   medium: {
-    colour: "#00ccff",
-    emoji: "🔵",
+    colour: "#facc15",
+    emoji: "🟡",
     label: "Medium",
+    short: "MED",
   },
 
   low: {
-    colour: "#8400ff",
-    emoji: "🟣",
+    colour: "#22c55e",
+    emoji: "🟢",
     label: "Low",
+    short: "LOW",
   },
 } as const;
 

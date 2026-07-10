@@ -125,70 +125,77 @@ body {
 }
 
 .filter-row {
+
     display: flex;
+
     justify-content: center;
 
     gap: 10px;
 
-    margin: 12px 0 16px;
-
-    flex-wrap: nowrap;
+    margin: 14px 0 18px;
 }
 
 .filter-row button {
 
-    width: 58px;
-    height: 44px;
-
-    border: none;
+    width: 72px;
+    height: 42px;
 
     border-radius: 999px;
 
-    background: white;
+    background: transparent;
 
-    box-shadow:
-        0 2px 8px rgba(0,0,0,.12);
+    font-size: 13px;
 
-    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: .5px;
 
     cursor: pointer;
 
-    transition: all .15s ease;
+    transition:
+        all .18s ease;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: 2px solid #6b7280;
+
+    color: #d1d5db;
 }
 
 .filter-row button:first-child {
 
-    width: 84px;
+    width: 82px;
 
-    font-size: 14px;
+    border-color: #9ca3af;
 
-    font-weight: 700;
-
-    letter-spacing: .4px;
+    color: white;
 }
 
-.filter-row button:hover {
 
-    transform: translateY(-2px);
+.filter-row button:hover{
 
-    box-shadow:
-        0 5px 14px rgba(0,0,0,.18);
+    border-color:white !important;
+
+    color:white !important;
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.05);
 }
 
-.filter-row button.active {
+.filter-row button.active{
 
-    transform: translateY(-2px);
+    border-color:white !important;
 
-    transform: scale(.95);
+    color:white !important;
+
+    background:rgba(255,255,255,.10);
 
     box-shadow:
-        0 6px 16px rgba(0,0,0,.18);
+        0 0 12px rgba(255,255,255,.18);
+}
 
-    outline: 3px solid #2563eb;
+.filter-row button:active{
+
+    transform:scale(.96);
 }
 
 

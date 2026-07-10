@@ -1,6 +1,6 @@
 import type { ConventionEvent } from "../types/models";
 
-import { priorityConfig } from "../utils/priorityColours";
+import { priorityConfig } from "../utils/priority";
 
 type Props = {
   event: ConventionEvent;
